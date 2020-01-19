@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://jasonye.xyz').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="上一篇主要讲述了Js的基本情况以及它的数据类型，而这一篇就开始讲Js的函数部分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Js学习笔记】（2）函数式编程">
+<meta property="og:url" content="http://jasonye.xyz/2015/07/18/js-note-2/index.html">
+<meta property="og:site_name" content="Hacking my life">
+<meta property="og:description" content="上一篇主要讲述了Js的基本情况以及它的数据类型，而这一篇就开始讲Js的函数部分。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2015-07-18T23:47:10.000Z">
+<meta property="article:modified_time" content="2020-01-19T06:05:27.755Z">
+<meta property="article:author" content="Jason Ye">
+<meta property="article:tag" content="JS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jasonye.xyz/2015/07/18/js-note-2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>【Js学习笔记】（2）函数式编程 | Hacking my life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76131240-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-76131240-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hacking my life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/18/js-note-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="Jason Ye">
+      <meta itemprop="description" content="Programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hacking my life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Js学习笔记】（2）函数式编程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-07-18 16:47:10" itemprop="dateCreated datePublished" datetime="2015-07-18T16:47:10-07:00">2015-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2015/07/18/js-note-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/18/js-note-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇主要讲述了Js的基本情况以及它的数据类型，而这一篇就开始讲Js的函数部分。</p>
+<a id="more"></a>
+<h2 id="一函数定义和调用">一、函数定义和调用</h2>
+<h3 id="定义">1.1定义</h3>
+<p>常规的定义包括这几个部分：</p>
+<p>1.关键字function 及 函数名；</p>
+<p>2.参数列表，用0括起来；</p>
+<p>3.函数体，用{}括起来；</p>
+<p>例子： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function add(a,b)&#123;</span><br><span class="line"></span><br><span class="line">return a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于Js语言支持动态数据类型，所以可以把函数看成是一个值，赋值给变量。</p>
+<p>并且，因为支持匿名函数，所以可以定一个匿名函数赋给一个变量，使其升级成为函数，</p>
+<p>例如: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var sub &#x3D; function (a,b)&#123;return a - b;&#125;</span><br></pre></td></tr></table></figure> 注意：上面因为是匿名函数，函数名就不存在了，但是赋值后，sub就是该函数的函数名。调用的时候可以直接这样调用： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub(3,2)；</span><br></pre></td></tr></table></figure> ### 1.2调用</p>
+<p>调用方式同正常语言的调用； 1.3参数arguments</p>
+<p>这个关键字是属于每个函数都有的一个参数，里面包含了传入参数的内容，个数等信息；</p>
+<p>例如：</p>
+<p>arguments.length提供了参数的个数；</p>
+<p>arguments[0]、arguments[2]分别访问了传入的第0和2个参数；</p>
+<p>所以说，在js里，一个函数就算没有定义传参列表，依旧可以传入参数。而且就算有参数列表的情况下，传入的参数个数超过了列表定义的个数也是可以的，只是分是否defined而已。</p>
+<h2 id="二高阶函数之传参函数">二、高阶函数之传参函数</h2>
+<p>这个名字想必来自于高数里面的高阶函数。它的思想就是将别的函数作为参数传入某个函数中使用。这也是函数式编程的核心之一。</p>
+<p>例如： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function abs_max(a, b,abs,max)&#123;</span><br><span class="line">return max(abs(a), abs(b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明：上例子返回a、b中绝对值更大的一个值；</p>
+<p>下面讲解下常用的几个将函数作为参数的函数； 2.1 map/reduce</p>
+<p>map和reduce都是Array的一个成员函数。其中map是对数组函数映射，reduce是归约（化简）。</p>
+<p>两个操作是来自于Google大牛Jeff Dean关于mapreduce的论文，MapReduce: Simplified Data Processing on Large Clusters</p>
+<p>map如同函数映射一样，将每个key映射到对应的value的值，而map接收的参数就是我们自己定义的的函数。</p>
+<p>reduce是将一系列的数据进行归约，迭代地将前一步的操作的结果与当前Key值进行操作，获得新的结果。 ### 2.2 filter</p>
+<p>filter的意思是过滤器，是Array下的一个函数，作用是过滤数组中不符合特征的元素。接收的参数是一个布尔型函数，true时保留元素，false时剔除元素。 ### 2.3 sort</p>
+<p>sort是我们常用的排序函数，也是在Array之下。除了默认的排序方式，我们可以传入一个比较函数，自定义确定元素次序。 三、高阶函数之返回函数</p>
+<p>同样，高阶函数也可以将函数作为返回值返回给调用位置。 ### 3.1 闭包</p>
+<p>闭包是函数式编程的重要概念之一。理解起来偏难，但是实际用起来觉得十分奇妙。</p>
+<p>我总结了多篇对其理解：</p>
+<p>1.它是函数内部和函数外部的桥梁：将外部的参数传入函数中，在返回中的函数中加入；</p>
+<p>2.它使局部变量能够保留在内存中；</p>
+<h3 id="generator">3.2 generator</h3>
+<p>generator，即生成器，实际类似于迭代器iterator。</p>
+<p>它利用高阶函数的特性，在返回中的函数中添加了yield语句（类似于return，但是遇到yield会继续执行后面的语句，而return就结束函数运行），使其每次执行都会返回一个值，并更新返回状态（结束或者继续运行），从而能够反复多次运行，直到最终的return才结束。</p>
+<p>参考：廖雪峰的JavaScript教程</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JS/" rel="tag"># JS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2015/07/13/js-note-1/" rel="prev" title="【Js学习笔记】（1）温故知新">
+      <i class="fa fa-chevron-left"></i> 【Js学习笔记】（1）温故知新
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/07/24/js-note-3/" rel="next" title="【Js学习笔记】（3）正则表达式">
+      【Js学习笔记】（3）正则表达式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一函数定义和调用"><span class="nav-number">1.</span> <span class="nav-text">一、函数定义和调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">1.1定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二高阶函数之传参函数"><span class="nav-number">2.</span> <span class="nav-text">二、高阶函数之传参函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#generator"><span class="nav-number">2.1.</span> <span class="nav-text">3.2 generator</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jason Ye"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Jason Ye</p>
+  <div class="site-description" itemprop="description">Programmer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jasonye.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://jasonye.xyz/2015/07/18/js-note-2/";
+    this.page.identifier = "2015/07/18/js-note-2/";
+    this.page.title = "【Js学习笔记】（2）函数式编程";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jasonye.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

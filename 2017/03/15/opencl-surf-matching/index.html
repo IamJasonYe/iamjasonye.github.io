@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://jasonye.xyz').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="This is the first post of the year 2017.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCL implementation of feature matching">
+<meta property="og:url" content="http://jasonye.xyz/2017/03/15/opencl-surf-matching/index.html">
+<meta property="og:site_name" content="Hacking my life">
+<meta property="og:description" content="This is the first post of the year 2017.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-03-16T06:46:00.000Z">
+<meta property="article:modified_time" content="2020-01-19T06:05:27.727Z">
+<meta property="article:author" content="Jason Ye">
+<meta property="article:tag" content="OpenCL">
+<meta property="article:tag" content="feature_matching">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jasonye.xyz/2017/03/15/opencl-surf-matching/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>OpenCL implementation of feature matching | Hacking my life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76131240-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-76131240-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hacking my life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2017/03/15/opencl-surf-matching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="Jason Ye">
+      <meta itemprop="description" content="Programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hacking my life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OpenCL implementation of feature matching
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-03-15 23:46:00" itemprop="dateCreated datePublished" datetime="2017-03-15T23:46:00-07:00">2017-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
+                    <span itemprop="name">Computer Vision</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2017/03/15/opencl-surf-matching/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/15/opencl-surf-matching/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>This is the first post of the year 2017. <a id="more"></a></p>
+<h2 id="recent-work-introduction">Recent work introduction</h2>
+<p>Recently, I have been working on a project that is to boost the speed of the <a href="https://en.wikipedia.org/wiki/Speeded_up_robust_features" target="_blank" rel="noopener">SURF</a>. The project mainly focuses on image stitching and requires demandingly real-time performance.</p>
+<p>At the very beginning, with the help from the source code of <a href="https://code.google.com/archive/p/clsurf/" target="_blank" rel="noopener">clsurf</a>, I merged it into my project and easily got 100 times faster than before by using the GPU accelerating.</p>
+<p>And here's my initial scheme of image stitching: (<strong>Since the project, to some extent confidential, is not released yet, I can't show the exact time of it</strong>)</p>
+<table>
+<thead>
+<tr class="header">
+<th>Procedure</th>
+<th>Time percentages for each frame</th>
+<th>Device or Host</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Detection of keypoints</td>
+<td>3%</td>
+<td>Device</td>
+</tr>
+<tr class="even">
+<td>Generating descriptors</td>
+<td>3%</td>
+<td>Device</td>
+</tr>
+<tr class="odd">
+<td>IO (Transfering keypoints and descriptors)</td>
+<td>10%</td>
+<td>Device to Host</td>
+</tr>
+<tr class="even">
+<td>Feature matching</td>
+<td>2%</td>
+<td>Host</td>
+</tr>
+<tr class="odd">
+<td>Calculating the perspective transform matrix</td>
+<td>2%</td>
+<td>Host</td>
+</tr>
+</tbody>
+</table>
+<h2 id="problem">Problem</h2>
+<p>However, after some tests, I found that it still couldn't fit the requirement since the detection of keypoints and the generating of descriptors was nearly to its extreme while the transferring data from device to host, that is, IO time almosts filled about 10% of the time for each frame, which was the most dominating part of all.</p>
+<h2 id="solution">Solution</h2>
+<p>By several times of profiling and reviewing the source code, I noticed that it transferred the descriptors back to the host (here on my computer) and used them to find the matching pairs between descriptors of continuous frames. I was inspired and wondered that "why not just do it on the devices and transfer the matching pairs back, which contains fewer bytes to transfer". Actually, it seems plausible because each matching pair is independently calculated and somehow doesn't exist memory exclusively accessing, which is the key to implement on GPU device.</p>
+<p>Before showing my kernel functions, let's see how to implement the matching process of feature descriptors in a regular way in pseudo code: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Step 1 Find the best and 2nd best(better) feature descriptors</span><br><span class="line">for a in descriptorsOfCurrentFame:</span><br><span class="line">    for b in descriptorsOfLastFrame:</span><br><span class="line">        d &#x3D; distance(a,b);</span><br><span class="line">        if d &gt; best:</span><br><span class="line">            # save b as the best matching of a</span><br><span class="line">        else if d &gt; better:</span><br><span class="line">            # save b as the better matching of a</span><br><span class="line">        end if</span><br><span class="line">     end for</span><br><span class="line">end for</span><br><span class="line"></span><br><span class="line"># Step 2 Calculate the ratio of these two descriptors</span><br><span class="line"></span><br><span class="line">ratio &#x3D; best.d &#x2F; better.d</span><br><span class="line"></span><br><span class="line"># Step 3 Accept or Reject based on the threshold</span><br><span class="line"></span><br><span class="line">if ratio &lt; threshold:</span><br><span class="line">    # Accept the best descriptor as the result</span><br><span class="line">else: </span><br><span class="line">    # Reject</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
+<h3 id="kernel-functions-of-opencl">Kernel functions of OpenCL</h3>
+<p>As for my initial try to enhance its performance, I divide the algorithm above into several kernels, ensuring it could be executed as tons of items for GPU. Here what these kernels functions have done exactly:</p>
+<ol type="1">
+<li><strong>Kernel of calculating the distance</strong>: mainly calculating Euclidean distance between descriptors of continuous frames (Almost same as before;</li>
+<li><strong>Kernel of ranking</strong>: Instead of getting the best distance or better distance directly, I choose to use the counters to save the number that how many distances are smaller than it. For example, if the distances are: d(0)=2, d(1)=4, d(2)=3, then the counters should be c(0)=0, c(1)=2, c(3)=1. It ranks or sorts the order of these distances indirectly. Since the GPU is not good at comparing or doing the logical comparison, I just make it suitable for GPU which is good at doing jobs on a large scale owing to its plenty of computing units. And as long as one item(an instance of the kernel) finds the counter equals to N-1 (N is the number of all distances), it must be the largest distance, the same as the better distance. Then this item could be saved for next kernel.</li>
+<li><strong>Kernel of calculating the ratio and rejecting bad features</strong>: Easy one, same as before.</li>
+</ol>
+<h3 id="comparison">Comparison</h3>
+<p>Comparison with the regular way, I mainly improve the implementation by two procedures: 1. Firstly, it is able to calculate the distances of descriptors independently and parallelly instead of serially. 2. Moreover, finding the best and better distance is the key procedure of the algorithm. Normally, that to find the k-largest number in a set of random numbers can have a O(logN), or nearly O(n) level solution. But in our case, implementing a quicksort, or like partition-exchange sort algorithm, may not be a good choice considering the weakness of GPU. Thus, dividing into the simple tasks, counting the ranking for each distance, would be a novel way to solve it.</p>
+<h3 id="about-reduction-of-data-transferring">About reduction of data transferring</h3>
+<p>After executing these kernels, we transfer the matching pair from the device to host. Previously, we transfer about (m+n) x 64 x 4 bytes (m: number of current frame's descriptors, n: number of last frame's descriptors, 64 is the size of the descriptor, 4 is the size of float value) data. And now, we just need m x 2 x 2 bytes (m is the number of current frame's features, 2 x 2 stands for that each pair contains two int16 numbers since normally the number of features of each frame is in the range of int16.). In that case, the ratio is{ (256 x (m+n)) / (4 x m) = 64 x (m+n) / m}, where m is nearly the same as n for the continuous frames of stream video. So we could simplify it as (64 x 2 x m) / m = 128, which indicates we reduce to 1/128 of data approximately.</p>
+<h3 id="result">Result</h3>
+<p>I have profiled the functions again. And it has almost ten times faster in the matching part, less than 1ms on the desktop. As well as we have a great decline in IO time, almost to 10 times (the relation between data scale and transferring time somehow is not linear)less than before.</p>
+<h2 id="conclusion-and-more-info">Conclusion and more info</h2>
+<p>The matching of features is very common in many applications that need to stitch or transform the images. Mostly, we find the matching pair on the host (CPU) and rarely make it on GPU. However, in this case, I happened to find a novel way to solve it perfectly if the requirement is demanding for time consumption, especially IO time. Due to the project is not released yet, I can't show my source code of its implementation. But I guess it could be updated on my GitHub in the future. Finally, as I am a rookie in OpenCL, I haven't comprehended much optimizing skill about the local group or synchronizing. If you have a better solution or haven't understood my solution yet, feel free to contact me.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OpenCL/" rel="tag"># OpenCL</a>
+              <a href="/tags/feature-matching/" rel="tag"># feature_matching</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/12/31/diary161231/" rel="prev" title="一个月的后端技术学习总结（三）Git及各种杂七杂八">
+      <i class="fa fa-chevron-left"></i> 一个月的后端技术学习总结（三）Git及各种杂七杂八
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/04/15/ransac/" rel="next" title="RANSAC">
+      RANSAC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#recent-work-introduction"><span class="nav-number">1.</span> <span class="nav-text">Recent work introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#problem"><span class="nav-number">2.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kernel-functions-of-opencl"><span class="nav-number">3.1.</span> <span class="nav-text">Kernel functions of OpenCL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#comparison"><span class="nav-number">3.2.</span> <span class="nav-text">Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#about-reduction-of-data-transferring"><span class="nav-number">3.3.</span> <span class="nav-text">About reduction of data transferring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#result"><span class="nav-number">3.4.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion-and-more-info"><span class="nav-number">4.</span> <span class="nav-text">Conclusion and more info</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jason Ye"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Jason Ye</p>
+  <div class="site-description" itemprop="description">Programmer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jasonye.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://jasonye.xyz/2017/03/15/opencl-surf-matching/";
+    this.page.identifier = "2017/03/15/opencl-surf-matching/";
+    this.page.title = "OpenCL implementation of feature matching";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jasonye.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
