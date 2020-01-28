@@ -46,20 +46,23 @@
   };
 </script>
 
-  <meta name="description" content="一、什么是正则表达式 正则表达式，英文是Regular expression，常缩写为regex或者regexp，">
+  <meta name="description" content="2020年第五周">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Js学习笔记】（3）正则表达式">
-<meta property="og:url" content="http://jasonye.xyz/2015/07/24/js-note-3/index.html">
+<meta property="og:title" content="每周更新 weekly update (5&#x2F;52）">
+<meta property="og:url" content="http://jasonye.xyz/2020/01/28/weekly-update/index.html">
 <meta property="og:site_name" content="Hacking my life">
-<meta property="og:description" content="一、什么是正则表达式 正则表达式，英文是Regular expression，常缩写为regex或者regexp，">
+<meta property="og:description" content="2020年第五周">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2015-07-24T07:00:00.000Z">
-<meta property="article:modified_time" content="2020-01-19T06:05:27.755Z">
+<meta property="og:image" content="http://jasonye.xyz/img/2020/01/kobe_legend.jpg">
+<meta property="article:published_time" content="2020-01-28T09:18:01.000Z">
+<meta property="article:modified_time" content="2020-01-28T10:47:48.504Z">
 <meta property="article:author" content="Jason Ye">
-<meta property="article:tag" content="JS">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="robotics">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jasonye.xyz/img/2020/01/kobe_legend.jpg">
 
-<link rel="canonical" href="http://jasonye.xyz/2015/07/24/js-note-3/">
+<link rel="canonical" href="http://jasonye.xyz/2020/01/28/weekly-update/">
 
 
 <script id="page-configurations">
@@ -71,7 +74,7 @@
   };
 </script>
 
-  <title>【Js学习笔记】（3）正则表达式 | Hacking my life</title>
+  <title>每周更新 weekly update (5/52） | Hacking my life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76131240-1"></script>
     <script>
@@ -190,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/24/js-note-3/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2020/01/28/weekly-update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -203,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Js学习笔记】（3）正则表达式
+          每周更新 weekly update (5/52）
         </h1>
 
         <div class="post-meta">
@@ -212,24 +215,24 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2015-07-24 00:00:00" itemprop="dateCreated datePublished" datetime="2015-07-24T00:00:00-07:00">2015-07-24</time>
+              <time title="Created: 2020-01-28 01:18:01 / Modified: 02:47:48" itemprop="dateCreated datePublished" datetime="2020-01-28T01:18:01-08:00">2020-01-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/UCSD/" itemprop="url" rel="index">
+                    <span itemprop="name">UCSD</span>
                   </a>
                 </span>
             </span>
@@ -243,8 +246,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/07/24/js-note-3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/24/js-note-3/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2020/01/28/weekly-update/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/01/28/weekly-update/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -259,42 +262,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一什么是正则表达式">一、什么是正则表达式</h2>
-<p>正则表达式，英文是Regular expression，常缩写为regex或者regexp，<a id="more"></a>或直接就是re。下面也直接称呼成RE了。 在我看来，这个名字真的把RE说得太复杂了，一个“正则”就把大家搞不明白这个到底是什么，望而却步了，还不如不如翻译成一般表达式更加通俗。 RE它实质就是我们常说的归纳总结，它用一种“放之四海而皆准”的法则去匹配字符（串）。而具体点，就是它用一种规定的、描述性的语言（我们在这里称它为RE语言吧）去描述一个我们想要的字符串，比如，我想要一个长度是3的字符串、我想要一个包含%%%这样pattern的字符串等等...这些字符串因为身上有着我们想要的“特征值”，而RE就是用来描述它的特征，让它去适配更多符合它特征的字符串。 RE因为它本质上是一种描述性的语言，所以它的规律性是很明显的，但是它只是一个表达式，这样的表达式往往缺乏层次感，所以阅读起来往往不便，提升其难度。</p>
-<h2 id="二怎么使用正则表达式">二、怎么使用正则表达式</h2>
-<p>说了那么多，可能需要看看RE究竟是什么才行，下面就用例子来介绍下RE的语法。 ### 2.1 通用匹配符</p>
-<p>如同c语言中的printf()标准输出一样，RE也采用类似于%d,%s这样的转义符来实现对字符的要求，如下面所示：</p>
+        <p>2020年第五周</p>
+<a id="more"></a>
+<h2 id="使用docker的一些感悟">使用Docker的一些感悟</h2>
+<p>在进入实验室之后，使用实验室的server来跑任务是一件很让人心情愉快的事情，尤其是我们实验室的服务器有多块GPU，目前使用这个server的人只有我和另一个同学，简直不能再爽了。</p>
+<p>但是有个头痛的问题，那就是大家在用server时会安装各种软件（不同版本的CUDA或者是ROS），而不同软件版本的API可能会互相干扰。 那么如何在大家共用的基础上，把实验环境给独立开来，是一个亟需解决的问题吧。我们实验室使用的是最简单的方法--用容器Docker去独立开发环境。</p>
+<p>在这里简单分享几点，稍微总结一下这段时间使用Docker的感悟:</p>
+<h3 id="强烈建议新手使用别人成熟的容器作为base层">1. 强烈建议新手使用别人成熟的容器作为Base层</h3>
+<p>毫无疑问，很多时候我们会用到CUDA来加速深度学习库，如PyTorch。之前一个Ph.D.同事在我们实验室里曾经分享过一个Dockerfile，里面基本上就是把CUDA从NVidia显卡开始安装起，十分繁杂，可维护性相当的低（并不是说不能用，只是在有很好的官方cuda image下，没啥必要这么做）。</p>
+<p>考虑到这个原因，在上个寒假要开启一个新的项目之前，我就决定从零开始写了一份自己的Dockerfile，彻底解决这个问题。 在对比了各种实现方式，我觉得将CUDA官方给的docker imag是一个极好的选择，也算是一个相当优雅的方式。</p>
+<p>首先你再也不用担心驱动问题或系统环境变量没设置调用不了显卡；而且在实际用过之后，个人感觉这个base image是比较纯净的，基本上不太会影响到你后面自己的开发需求；最后就是它有丰富的选择，满足不同的需要，包括系统版本、CuDNN版本以及具体使用场景而区分的几个不同的”flavors“:</p>
+<blockquote><p>CUDA images come in three flavors and are available through the NVIDIA public hub repository.</p>
 <ul>
-<li>:匹配字母或数字或下划线或汉字</li>
-<li>匹配数字</li>
-<li>:匹配任意的空白符</li>
-<li>. :匹配除换行符以外的任意字符</li>
-<li>[] :匹配[]内的字符。如[abc]匹配abc中的任意字符，[a-z]匹配a到z范围的字符。</li>
+<li>base: starting from CUDA 9.0, contains the bare minimum (libcudart) to deploy a pre-built CUDA application. Use this image if you want to manually select which CUDA packages you want to install.</li>
+<li>runtime: extends the base image by adding all the shared libraries from the CUDA toolkit. Use this image if you have a pre-built application using multiple CUDA libraries.</li>
+<li>devel: extends the runtime image by adding the compiler toolchain, the debugging tools, the headers and the static libraries. Use this image to compile a CUDA application from sources.</li>
 </ul>
-<h3 id="匹配长度控制">2.2 匹配长度控制</h3>
-<ul>
-<li>*:匹配长度不少于0</li>
-<li>+:匹配长度大于零</li>
-<li>?:匹配长度为0或1</li>
-<li>{n}:匹配长度为n</li>
-<li>{m,n}:匹配长度为m到n内的数</li>
-</ul>
-<h3 id="匹配位置控制">2.3 匹配位置控制</h3>
-<ul>
-<li>^$:字符串首尾匹配</li>
-<li>单词匹配</li>
-</ul>
-<h3 id="其他">2.4 其他</h3>
-<p>待补充</p>
-<h2 id="三js中的正则表达式">三、Js中的正则表达式</h2>
-<h3 id="表示方式">3.1 表示方式</h3>
-<p>第一种方式，可直接用/RE/的形式来表示一个正则表达式。</p>
-<p>如 var a = /[]*<span class="citation" data-cites="163.com/来匹配一个163邮箱的用户名">@163.com/来匹配一个163邮箱的用户名</span>。</p>
-<p>第二种方式，利用RegExp对象生成一个RE。</p>
-<p>如 var a = RegExp('[]*<span class="citation" data-cites="163.com">@163.com</span>')。 ### 3.2 切分与分组</p>
-<p>split():用RE的规则去切分字符串；如a.split(/[,]+/)来切分字符串里的空格或者逗号。 ():在正则表达式中分组，使得在正则表达式被执行后，返回了相应的组的字符。</p>
-<h3 id="测试运行">3.3 测试运行</h3>
-<p>test():用来测试字符串是否符合我们定义的RE exec():将字符串与RE进行正则匹配，返回相应的子串（原字符串，以及如果有分组的话，则后续返回分组字符串），如果匹配失败，返回null。</p>
+<footer><strong>GitHub NVIDIA/nvidia-docker</strong><cite><a href="https://github.com/NVIDIA/nvidia-docker/wiki/CUDA" target="_blank" rel="noopener">CUDA wiki</a></cite></footer></blockquote>
+<p>这里主要区别是runtime和devel版本。前者是可以现成跑需要显卡相关的应用，不再需要有关的CUDA开发环境；而我选择了devel版本，因为后续需要去从源码编译一些CUDA相关的代码，如libTorch。</p>
+<h3 id="一定要包含安装包的版本号">2. 一定要包含安装包的版本号</h3>
+<p>很多时候，我们会去clone一些github的repo，用来源码编译之类的。</p>
+<p>我们之前就是这样去安装PyTorch。但后来有一天重新编译镜像之后，我发现原来的PyTorch代码编译报错了，让我苦恼了好一会儿。经过多番debug调试，我后来发现是因为PyTorch的版本更新（从1.1到1.2），使得C++的前端接口发生了改变，导入网络模型的API不同了，</p>
+<p>这就有点尴尬了，因为在跑代码出bug的时候根本没有相关的报错信息，这种因为版本不同的环境Dependency而出的错，在少数情况可能是无解。正因此，我们在写Dockerfile的时候，一定要写下相应的版本号，为了今后的代码鲁棒性打下基础吧。</p>
+<h3 id="一个完整动作构建一层缓存">3. 一个完整动作构建一层缓存</h3>
+<p>在编译镜像的时候，会产生许多中间层的cache方便rebuild。然而过多的RUN、ADD、COPY指令会使得Dockerfile非常杂乱，而且中间产生许多cache占用系统空间，随便一下就是10+GB。</p>
+<p>理想的做法就是把多个RUN指令合并，尽可能地用一个RUN命令去完成一整套动作，比如编译PyTorch，可以就是从<strong>git clone</strong>指令到最后的<strong>python setup.py install</strong>一气呵成。这样减少了许多中间layers.(很显然，如果想这么做，你必须能够确保一次写对，否则一有错误，就要花多倍的时间去多次执行这行指令)</p>
+<p>更多需要怎么写Dockerfile， 可以参考这篇文章<a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/" target="_blank" rel="noopener">Best practices for writing Dockerfiles</a>。 而docker常用指令（command）这类东西，相对来说比较简单，别人总结也挺多，也就不再赘述.</p>
+<h2 id="科比传奇永在">科比，传奇永在</h2>
+<p><img src="/img/2020/01/kobe_legend.jpg" alt="Kobe" title="Kobe" width="800px"></p>
+<p>最后，让我们一起记住这个传奇！</p>
 
     </div>
 
@@ -304,7 +300,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/JS/" rel="tag"># JS</a>
+              <a href="/tags/docker/" rel="tag"># docker</a>
+              <a href="/tags/robotics/" rel="tag"># robotics</a>
           </div>
 
         
@@ -313,13 +310,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2015/07/18/js-note-2/" rel="prev" title="【Js学习笔记】（2）函数式编程">
-      <i class="fa fa-chevron-left"></i> 【Js学习笔记】（2）函数式编程
+    <a href="/2020/01/21/weekly-update/" rel="prev" title="每周更新 weekly update (4/52)">
+      <i class="fa fa-chevron-left"></i> 每周更新 weekly update (4/52)
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2015/08/26/diary150826/" rel="next" title="挑战">
-      挑战 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -386,7 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一什么是正则表达式"><span class="nav-number">1.</span> <span class="nav-text">一、什么是正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二怎么使用正则表达式"><span class="nav-number">2.</span> <span class="nav-text">二、怎么使用正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配长度控制"><span class="nav-number">2.1.</span> <span class="nav-text">2.2 匹配长度控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配位置控制"><span class="nav-number">2.2.</span> <span class="nav-text">2.3 匹配位置控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.3.</span> <span class="nav-text">2.4 其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三js中的正则表达式"><span class="nav-number">3.</span> <span class="nav-text">三、Js中的正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表示方式"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试运行"><span class="nav-number">3.2.</span> <span class="nav-text">3.3 测试运行</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用docker的一些感悟"><span class="nav-number">1.</span> <span class="nav-text">使用Docker的一些感悟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强烈建议新手使用别人成熟的容器作为base层"><span class="nav-number">1.1.</span> <span class="nav-text">1. 强烈建议新手使用别人成熟的容器作为Base层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一定要包含安装包的版本号"><span class="nav-number">1.2.</span> <span class="nav-text">2. 一定要包含安装包的版本号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个完整动作构建一层缓存"><span class="nav-number">1.3.</span> <span class="nav-text">3. 一个完整动作构建一层缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科比传奇永在"><span class="nav-number">2.</span> <span class="nav-text">科比，传奇永在</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -527,9 +521,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://jasonye.xyz/2015/07/24/js-note-3/";
-    this.page.identifier = "2015/07/24/js-note-3/";
-    this.page.title = "【Js学习笔记】（3）正则表达式";
+    this.page.url = "http://jasonye.xyz/2020/01/28/weekly-update/";
+    this.page.identifier = "2020/01/28/weekly-update/";
+    this.page.title = "每周更新 weekly update (5/52）";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
