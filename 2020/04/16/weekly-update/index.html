@@ -46,21 +46,24 @@
   };
 </script>
 
-  <meta name="description" content="This is the first post of the year 2017.">
+  <meta name="description" content="2020年第十六周">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenCL implementation of feature matching">
-<meta property="og:url" content="http://jasonye.xyz/2017/03/15/opencl-surf-matching/index.html">
+<meta property="og:title" content="每周更新 weekly update (16&#x2F;52)">
+<meta property="og:url" content="http://jasonye.xyz/2020/04/16/weekly-update/index.html">
 <meta property="og:site_name" content="Hacking my life">
-<meta property="og:description" content="This is the first post of the year 2017.">
+<meta property="og:description" content="2020年第十六周">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2017-03-16T06:46:00.000Z">
-<meta property="article:modified_time" content="2020-01-19T06:05:27.727Z">
+<meta property="og:image" content="http://jasonye.xyz/img/2020/04/first_macos_flutter_app.png">
+<meta property="og:image" content="http://jasonye.xyz/img/2020/04/first_ipad_flutter_app.png">
+<meta property="article:published_time" content="2020-04-16T08:33:47.000Z">
+<meta property="article:modified_time" content="2020-04-29T01:31:31.430Z">
 <meta property="article:author" content="Jason Ye">
-<meta property="article:tag" content="OpenCL">
-<meta property="article:tag" content="feature_matching">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jasonye.xyz/img/2020/04/first_macos_flutter_app.png">
 
-<link rel="canonical" href="http://jasonye.xyz/2017/03/15/opencl-surf-matching/">
+<link rel="canonical" href="http://jasonye.xyz/2020/04/16/weekly-update/">
 
 
 <script id="page-configurations">
@@ -72,7 +75,7 @@
   };
 </script>
 
-  <title>OpenCL implementation of feature matching | Hacking my life</title>
+  <title>每周更新 weekly update (16/52) | Hacking my life</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76131240-1"></script>
     <script>
@@ -191,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2017/03/15/opencl-surf-matching/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2020/04/16/weekly-update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -204,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OpenCL implementation of feature matching
+          每周更新 weekly update (16/52)
         </h1>
 
         <div class="post-meta">
@@ -214,14 +217,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2017-03-15 23:46:00" itemprop="dateCreated datePublished" datetime="2017-03-15T23:46:00-07:00">2017-03-15</time>
+              <time title="Created: 2020-04-16 01:33:47" itemprop="dateCreated datePublished" datetime="2020-04-16T01:33:47-07:00">2020-04-16</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-04-28 18:31:31" itemprop="dateModified" datetime="2020-04-28T18:31:31-07:00">2020-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,8 +232,14 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Computer-Vision/" itemprop="url" rel="index">
-                    <span itemprop="name">Computer Vision</span>
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/UCSD/" itemprop="url" rel="index">
+                    <span itemprop="name">UCSD</span>
                   </a>
                 </span>
             </span>
@@ -244,8 +253,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2017/03/15/opencl-surf-matching/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/03/15/opencl-surf-matching/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2020/04/16/weekly-update/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/16/weekly-update/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -260,67 +269,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>This is the first post of the year 2017. <a id="more"></a></p>
-<h2 id="recent-work-introduction">Recent work introduction</h2>
-<p>Recently, I have been working on a project that is to boost the speed of the <a href="https://en.wikipedia.org/wiki/Speeded_up_robust_features" target="_blank" rel="noopener">SURF</a>. The project mainly focuses on image stitching and requires demandingly real-time performance.</p>
-<p>At the very beginning, with the help from the source code of <a href="https://code.google.com/archive/p/clsurf/" target="_blank" rel="noopener">clsurf</a>, I merged it into my project and easily got 100 times faster than before by using the GPU accelerating.</p>
-<p>And here's my initial scheme of image stitching: (<strong>Since the project, to some extent confidential, is not released yet, I can't show the exact time of it</strong>)</p>
-<table>
-<thead>
-<tr class="header">
-<th>Procedure</th>
-<th>Time percentages for each frame</th>
-<th>Device or Host</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Detection of keypoints</td>
-<td>3%</td>
-<td>Device</td>
-</tr>
-<tr class="even">
-<td>Generating descriptors</td>
-<td>3%</td>
-<td>Device</td>
-</tr>
-<tr class="odd">
-<td>IO (Transfering keypoints and descriptors)</td>
-<td>10%</td>
-<td>Device to Host</td>
-</tr>
-<tr class="even">
-<td>Feature matching</td>
-<td>2%</td>
-<td>Host</td>
-</tr>
-<tr class="odd">
-<td>Calculating the perspective transform matrix</td>
-<td>2%</td>
-<td>Host</td>
-</tr>
-</tbody>
-</table>
-<h2 id="problem">Problem</h2>
-<p>However, after some tests, I found that it still couldn't fit the requirement since the detection of keypoints and the generating of descriptors was nearly to its extreme while the transferring data from device to host, that is, IO time almosts filled about 10% of the time for each frame, which was the most dominating part of all.</p>
-<h2 id="solution">Solution</h2>
-<p>By several times of profiling and reviewing the source code, I noticed that it transferred the descriptors back to the host (here on my computer) and used them to find the matching pairs between descriptors of continuous frames. I was inspired and wondered that "why not just do it on the devices and transfer the matching pairs back, which contains fewer bytes to transfer". Actually, it seems plausible because each matching pair is independently calculated and somehow doesn't exist memory exclusively accessing, which is the key to implement on GPU device.</p>
-<p>Before showing my kernel functions, let's see how to implement the matching process of feature descriptors in a regular way in pseudo code: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Step 1 Find the best and 2nd best(better) feature descriptors</span><br><span class="line">for a in descriptorsOfCurrentFame:</span><br><span class="line">    for b in descriptorsOfLastFrame:</span><br><span class="line">        d &#x3D; distance(a,b);</span><br><span class="line">        if d &gt; best:</span><br><span class="line">            # save b as the best matching of a</span><br><span class="line">        else if d &gt; better:</span><br><span class="line">            # save b as the better matching of a</span><br><span class="line">        end if</span><br><span class="line">     end for</span><br><span class="line">end for</span><br><span class="line"></span><br><span class="line"># Step 2 Calculate the ratio of these two descriptors</span><br><span class="line"></span><br><span class="line">ratio &#x3D; best.d &#x2F; better.d</span><br><span class="line"></span><br><span class="line"># Step 3 Accept or Reject based on the threshold</span><br><span class="line"></span><br><span class="line">if ratio &lt; threshold:</span><br><span class="line">    # Accept the best descriptor as the result</span><br><span class="line">else: </span><br><span class="line">    # Reject</span><br><span class="line">end if</span><br></pre></td></tr></table></figure></p>
-<h3 id="kernel-functions-of-opencl">Kernel functions of OpenCL</h3>
-<p>As for my initial try to enhance its performance, I divide the algorithm above into several kernels, ensuring it could be executed as tons of items for GPU. Here what these kernels functions have done exactly:</p>
+        <p>2020年第十六周</p>
+<a id="more"></a>
+<h2 id="dart-flutter-学习">Dart &amp; Flutter 学习</h2>
+<p>最近在疫情期间，闲着无聊想去学一下新东西，刚好在YouTube上就推荐了 Google 的 Flutter 大会视频（应该是之前看 Flutter 介绍视频的联想），简单看了一下视频，觉得还是蛮有意思的。 于是这周周末的时候，就花了一些时间，简单看了一下 Dart 语言和 Flutter 框架， 打算做个 App 试试看。</p>
+<p>Dart 语言应该十分简单，对于有C/C++基础的同学应该都不会陌生，看着 Dart 官方给的一些 <a href="https://dart.dev/samples" target="_blank" rel="noopener">Samples</a>，基本上就能够快速上手。</p>
+<p>而 Flutter 框架显然是一个 Google 想要统一所有平台应用开发的一个更 general 的框架， 正因为如此，它的官方文档除了提供最基础的入门教学，还给出了不同平台有基础的开发者的快速 cookbook ， 我则是直接看的 <a href="https://flutter.dev/docs/get-started/flutter-for/android-devs" target="_blank" rel="noopener">Flutter for Android developers</a>, 所以基本上花了一个多小时，仔细对比了 Android 和 Flutter 的特性， 大概了解到了 Flutter 框架目前的一些现状：</p>
 <ol type="1">
-<li><strong>Kernel of calculating the distance</strong>: mainly calculating Euclidean distance between descriptors of continuous frames (Almost same as before;</li>
-<li><strong>Kernel of ranking</strong>: Instead of getting the best distance or better distance directly, I choose to use the counters to save the number that how many distances are smaller than it. For example, if the distances are: d(0)=2, d(1)=4, d(2)=3, then the counters should be c(0)=0, c(1)=2, c(3)=1. It ranks or sorts the order of these distances indirectly. Since the GPU is not good at comparing or doing the logical comparison, I just make it suitable for GPU which is good at doing jobs on a large scale owing to its plenty of computing units. And as long as one item(an instance of the kernel) finds the counter equals to N-1 (N is the number of all distances), it must be the largest distance, the same as the better distance. Then this item could be saved for next kernel.</li>
-<li><strong>Kernel of calculating the ratio and rejecting bad features</strong>: Easy one, same as before.</li>
+<li><p>框架总体还在完善中， 跨平台支持主流的移动和桌面平台，包括 Android/iOS/Windows/macOS/Linux 等；</p></li>
+<li><p>前端界面支持已经比较完善了，有些是能够支持到对应平台的原生控件样式；</p></li>
+<li><p>后端发展得有些不够完备，如GPS、相机等API都是目前只有社区包支持；</p></li>
+<li><p>一些高级的特性还在处于 Beta 版本， 如 Native Code Support ， 这对应 Android 里面的 NDK 开发，所以如果有需要本地运行的性能要求软件，可能会要有别的方式去“绕行”。</p></li>
 </ol>
-<h3 id="comparison">Comparison</h3>
-<p>Comparison with the regular way, I mainly improve the implementation by two procedures: 1. Firstly, it is able to calculate the distances of descriptors independently and parallelly instead of serially. 2. Moreover, finding the best and better distance is the key procedure of the algorithm. Normally, that to find the k-largest number in a set of random numbers can have a O(logN), or nearly O(n) level solution. But in our case, implementing a quicksort, or like partition-exchange sort algorithm, may not be a good choice considering the weakness of GPU. Thus, dividing into the simple tasks, counting the ranking for each distance, would be a novel way to solve it.</p>
-<h3 id="about-reduction-of-data-transferring">About reduction of data transferring</h3>
-<p>After executing these kernels, we transfer the matching pair from the device to host. Previously, we transfer about (m+n) x 64 x 4 bytes (m: number of current frame's descriptors, n: number of last frame's descriptors, 64 is the size of the descriptor, 4 is the size of float value) data. And now, we just need m x 2 x 2 bytes (m is the number of current frame's features, 2 x 2 stands for that each pair contains two int16 numbers since normally the number of features of each frame is in the range of int16.). In that case, the ratio is{ (256 x (m+n)) / (4 x m) = 64 x (m+n) / m}, where m is nearly the same as n for the continuous frames of stream video. So we could simplify it as (64 x 2 x m) / m = 128, which indicates we reduce to 1/128 of data approximately.</p>
-<h3 id="result">Result</h3>
-<p>I have profiled the functions again. And it has almost ten times faster in the matching part, less than 1ms on the desktop. As well as we have a great decline in IO time, almost to 10 times (the relation between data scale and transferring time somehow is not linear)less than before.</p>
-<h2 id="conclusion-and-more-info">Conclusion and more info</h2>
-<p>The matching of features is very common in many applications that need to stitch or transform the images. Mostly, we find the matching pair on the host (CPU) and rarely make it on GPU. However, in this case, I happened to find a novel way to solve it perfectly if the requirement is demanding for time consumption, especially IO time. Due to the project is not released yet, I can't show my source code of its implementation. But I guess it could be updated on my GitHub in the future. Finally, as I am a rookie in OpenCL, I haven't comprehended much optimizing skill about the local group or synchronizing. If you have a better solution or haven't understood my solution yet, feel free to contact me.</p>
+<p>最后，简单配置了一下环境以及工程，在本地的 iOS Simulator 和 macOS 上跑了一样样例程序， 觉得还是蛮简单的，后续可以尝试更多有趣的ideas。</p>
+<p><img src="/img/2020/04/first_macos_flutter_app.png" alt="first_macOS_flutter_app" title="first_macOS_flutter_app" ></p>
+<p><img src="/img/2020/04/first_ipad_flutter_app.png" alt="first_ipad_flutter_app" title="first_ipad_flutter_app" ></p>
+<h2 id="阅读笔记">阅读笔记</h2>
+<h3 id="可视化git的操作">可视化Git的操作</h3>
+<p>文章链接：<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1" target="_blank" rel="noopener">CS Visualized: Useful Git Commands</a></p>
+<p>这周刷微博，偶然看到这位程序媛的关于Git文章，被她用于可视化的gif给惊艳到了，这对于普通人理解Git的实际工作原理，有很好的帮助，很值得花时间去回顾一下。而且有一些命令我以前不怎么用过，经过她的介绍，也算是学到了新东西。</p>
+<h3 id="multi-stage-build-for-docker">Multi-stage build for Docker</h3>
+<p>文章链接：<a href="https://blog.bitsrc.io/a-guide-to-docker-multi-stage-builds-206e8f31aeb8" target="_blank" rel="noopener">A Guide to Docker Multi-Stage Builds</a></p>
+<p>使用了一段时间Docker用于研究和开发，总有感觉自己在用的 Dockerfile 是那么的臃肿，而最终使得生成的Image是非常大的。</p>
+<p>举个例子，在我之前的一个项目中需要用到OMPL和FCL的库，而在实际的使用上我们只要用到运行库，但我们为了在特定的系统上使用，而不得不重新编译这个库，进而去安装一堆依赖库去编译，从而增加了Image的大小和降低了纯净度。从这个角度出发，我会想只需要把这些库在一个独立环境里先编译好，然后COPY到最终的使用环境，这样就好了。</p>
+<p>毫无疑问，看完这篇文章，我觉得就刚好解决了我这个痛点，它介绍了 Docker 17.05的版本的一个叫multi-stage build的新特性，使得我们可以在一个 Dockerfile 里去定义不同 stages，然后不同的 stages 能够互相访问，且各自独立，所以使得最终我们运行环境下的Image尽可能compact，达到我们对可维护和可控制的需求。</p>
 
     </div>
 
@@ -330,8 +302,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/OpenCL/" rel="tag"># OpenCL</a>
-              <a href="/tags/feature-matching/" rel="tag"># feature_matching</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
           </div>
 
         
@@ -340,13 +312,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2016/12/31/diary161231/" rel="prev" title="一个月的后端技术学习总结（三）Git及各种杂七杂八">
-      <i class="fa fa-chevron-left"></i> 一个月的后端技术学习总结（三）Git及各种杂七杂八
+    <a href="/2020/04/11/weekly-update/" rel="prev" title="每周更新 weekly update (14/52）New quarter">
+      <i class="fa fa-chevron-left"></i> 每周更新 weekly update (14/52）New quarter
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2017/04/15/ransac/" rel="next" title="RANSAC">
-      RANSAC <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -413,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#recent-work-introduction"><span class="nav-number">1.</span> <span class="nav-text">Recent work introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#problem"><span class="nav-number">2.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kernel-functions-of-opencl"><span class="nav-number">3.1.</span> <span class="nav-text">Kernel functions of OpenCL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#comparison"><span class="nav-number">3.2.</span> <span class="nav-text">Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#about-reduction-of-data-transferring"><span class="nav-number">3.3.</span> <span class="nav-text">About reduction of data transferring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#result"><span class="nav-number">3.4.</span> <span class="nav-text">Result</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion-and-more-info"><span class="nav-number">4.</span> <span class="nav-text">Conclusion and more info</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dart-flutter-学习"><span class="nav-number">1.</span> <span class="nav-text">Dart &amp; Flutter 学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读笔记"><span class="nav-number">2.</span> <span class="nav-text">阅读笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化git的操作"><span class="nav-number">2.1.</span> <span class="nav-text">可视化Git的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi-stage-build-for-docker"><span class="nav-number">2.2.</span> <span class="nav-text">Multi-stage build for Docker</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -554,9 +523,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://jasonye.xyz/2017/03/15/opencl-surf-matching/";
-    this.page.identifier = "2017/03/15/opencl-surf-matching/";
-    this.page.title = "OpenCL implementation of feature matching";
+    this.page.url = "http://jasonye.xyz/2020/04/16/weekly-update/";
+    this.page.identifier = "2020/04/16/weekly-update/";
+    this.page.title = "每周更新 weekly update (16/52)";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
