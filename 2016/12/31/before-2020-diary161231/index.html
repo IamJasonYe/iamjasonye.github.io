@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://jasonye.xyz').hostname,
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="接前两篇文章 《一》 《二》 ### Git的分支管理 Git算是继SVN之后，成为越来越多人的代码托管工具，其设计极大地方便团队的远程协作：分布式仓库使得代码库不再需要中心式管理，灵活多变的版本滚动使得版本的容错性更强。当中，分支管理可算其一大亮点，成为产品迭代开发的绝佳法宝。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个月的后端技术学习总结（三）Git及各种杂七杂八">
+<meta property="og:url" content="http://jasonye.xyz/2016/12/31/before-2020-diary161231/index.html">
+<meta property="og:site_name" content="Hacking my life">
+<meta property="og:description" content="接前两篇文章 《一》 《二》 ### Git的分支管理 Git算是继SVN之后，成为越来越多人的代码托管工具，其设计极大地方便团队的远程协作：分布式仓库使得代码库不再需要中心式管理，灵活多变的版本滚动使得版本的容错性更强。当中，分支管理可算其一大亮点，成为产品迭代开发的绝佳法宝。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-01-01T06:55:00.000Z">
+<meta property="article:modified_time" content="2020-07-17T08:01:44.295Z">
+<meta property="article:author" content="Jason Ye">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Crontab">
+<meta property="article:tag" content="Celery">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jasonye.xyz/2016/12/31/before-2020-diary161231/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>一个月的后端技术学习总结（三）Git及各种杂七杂八 | Hacking my life</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76131240-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-76131240-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hacking my life</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">My blog</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2016/12/31/before-2020-diary161231/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="Jason Ye">
+      <meta itemprop="description" content="Programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hacking my life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一个月的后端技术学习总结（三）Git及各种杂七杂八
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-31 22:55:00" itemprop="dateCreated datePublished" datetime="2016-12-31T22:55:00-08:00">2016-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Diary/" itemprop="url" rel="index">
+                    <span itemprop="name">Diary</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/12/31/before-2020-diary161231/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/31/before-2020-diary161231/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>接前两篇文章 <a href="/2016/12/23/diary161223/">《一》</a> <a href="/2016/12/30/diary161230/">《二》</a> ### Git的分支管理 <strong>Git</strong>算是继SVN之后，成为越来越多人的代码托管工具，其设计极大地方便团队的远程协作：分布式仓库使得代码库不再需要中心式管理，灵活多变的版本滚动使得版本的容错性更强。当中，分支管理可算其一大亮点，成为产品迭代开发的绝佳法宝。<a id="more"></a></p>
+<p><a href="http://danielkummer.github.io/git-flow-cheatsheet/" target="_blank" rel="noopener">Git-flow</a>是Git分支管理的一个很好的Wrapper，使得分支管理更加方便。但是我觉得作为初学者在用了一段时间之后，应该脱出这个Wrapper，逐步去了解一下真正的Git是如何实现分支管理的。</p>
+<p>首先，在创建一个Repo之后，我们默认会得到一个Master分支。 <strong>Master分支</strong>，简单地可以理解成为主干，是我们整个产品的静脉。之所以称为静脉，是它相对于我们其它分支，它的改动次数是比较少的，在我们产品发包时，它的commit节点算是稳定版本或者是可用度极高的版本。</p>
+<p>然后，在我们开发时，我们主要在<strong>develop</strong>分支上进行操作，而当前有多个开发者同时进行开发时，我们也可以根据不同人或者不同功能在<strong>develop</strong>分支的基础上延伸出更多的<strong>feature</strong>分支或者是独立开发分支。最后，当单个功能完成或者队员完成了自己部分后，我们将其重新合并到<strong>develop</strong>分支。</p>
+<p>当一个开发周期结束后，我们需要发布新的产品。这时候我们可以将<strong>develop</strong>分支备份到<strong>test</strong>分支用于debug测试，完成漏洞修复后合并回<strong>develop</strong>分支。而当然如果需要多人同时测试，我们也可以建立多个test分支，合并时只需注意处理conflict就好。此时<strong>develop</strong>分支基本算是一个可用的版本，再进一步修饰或者微改（如增加注释、排版、甚至是代码的压缩处理）后，我们基本可以重新将其合并至<strong>master</strong>分支。</p>
+<p>最后遇到<strong>master</strong>分支上有超出预期的bugs，这时候我们在<strong>master</strong>基础延伸出<strong>hotfix</strong>分支（紧急处理）。将bugs解决后，我们需要重新合并至<strong>master</strong>分支和当前<strong>develop</strong>分支。</p>
+<h3 id="python的包管理--虚拟环境virtualenv和virtualenvwrapper">Python的包管理--虚拟环境VirtualEnv和VirtualEnvWrapper</h3>
+<p><a href="https://virtualenv.pypa.io/en/stable/" target="_blank" rel="noopener">Virtualenv</a>是python的一个包，用于管理python的packages，可以理解为pip的虚拟环境。 它的好处是当我们开发时，我们能够清楚清楚当前开发环境需要用到哪些python包，减少不必要的包安装，便于工程的环境迁移。 而<a href="https://virtualenvwrapper.readthedocs.io/en/latest/" target="_blank" rel="noopener">VirtualenvWrapper</a>则是<strong>Virtualenv</strong>的一个封装器，简化许多命令操作，方便开发者使用。</p>
+<h3 id="crontab在系统的用处">Crontab在系统的用处</h3>
+<p><strong>Cron</strong>是操作系统中的一个轮询服务，使得某个指令或者程序能够周期地运行，不断更新数据状态。 而<strong>crontab</strong>是“cron table”的意思，用于记录轮询服务需要执行的内容和周期。其中的规则允许程序或者命令在指定相应的周期（每10分钟，或者某个月的某几天，或者每7分钟、2小时等等）在给定的运行目录下执行，而搭配重定向输出，能够查看到执行的结果。而周期最短要求为1分钟，所以如果要求比较精确的执行任务可能无法做到。 这个可以用于服务器上对于用户订单数据的更新，也可以制作个人的定期提醒（生日提醒，或者周期任务提醒），而配合shell命令，我们可以实现更多复杂的周期任务，提高生产效率。</p>
+<h3 id="异步处理框架celery">异步处理框架Celery</h3>
+<p><strong><a href="http://www.celeryproject.org/docs-and-support/" target="_blank" rel="noopener">Celery</a></strong>是一个分布的异步任务队列，支持多语言和多broker。 在我们开发Web应用时，对于某些操作可能需要耗费大量时间，常常会阻塞住I/O，大大降低了效率和多用户访问能力。而异步处理能够解决这些操作高I/O占用的问题，进而把CPU时间交还给主进程。至于分布式处理则能够让我们的程序的线程或进程可以在不同核心或者不同机器中运行，再者结合“生产者-消费者”模式，我们能够将不同服务器分配成不同的角色，让我们的开发运维更加明晰。</p>
+<p>~~~~</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/Crontab/" rel="tag"># Crontab</a>
+              <a href="/tags/Celery/" rel="tag"># Celery</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/12/30/before-2020-diary161230/" rel="prev" title="一个月的后端技术学习总结（二）编辑器，我最终还是选了Vim">
+      <i class="fa fa-chevron-left"></i> 一个月的后端技术学习总结（二）编辑器，我最终还是选了Vim
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/03/15/before-2020-opencl-surf-matching/" rel="next" title="OpenCL implementation of feature matching">
+      OpenCL implementation of feature matching <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python的包管理--虚拟环境virtualenv和virtualenvwrapper"><span class="nav-number">1.</span> <span class="nav-text">Python的包管理--虚拟环境VirtualEnv和VirtualEnvWrapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crontab在系统的用处"><span class="nav-number">2.</span> <span class="nav-text">Crontab在系统的用处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异步处理框架celery"><span class="nav-number">3.</span> <span class="nav-text">异步处理框架Celery</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jason Ye"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">Jason Ye</p>
+  <div class="site-description" itemprop="description">Programmer</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jason Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://jasonye.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://jasonye.xyz/2016/12/31/before-2020-diary161231/";
+    this.page.identifier = "2016/12/31/before-2020-diary161231/";
+    this.page.title = "一个月的后端技术学习总结（三）Git及各种杂七杂八";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://jasonye.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

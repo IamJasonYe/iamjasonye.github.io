@@ -187,7 +187,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2016/03/17/stream-cipher-xor/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2016/03/22/before-2020-ex-eucli-alg-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -201,7 +201,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2016/03/17/stream-cipher-xor/" class="post-title-link" itemprop="url">流加密算法XOR解密</a>
+            <a href="/2016/03/22/before-2020-ex-eucli-alg-md/" class="post-title-link" itemprop="url">拓展欧拉算法及GF($2^n$)多项式应用</a>
         </h1>
 
         <div class="post-meta">
@@ -211,14 +211,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2016-03-17 23:36:05" itemprop="dateCreated datePublished" datetime="2016-03-17T23:36:05-07:00">2016-03-17</time>
+              <time title="Created: 2016-03-22 00:56:35" itemprop="dateCreated datePublished" datetime="2016-03-22T00:56:35-07:00">2016-03-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -241,8 +241,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2016/03/17/stream-cipher-xor/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/17/stream-cipher-xor/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2016/03/22/before-2020-ex-eucli-alg-md/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/22/before-2020-ex-eucli-alg-md/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -257,10 +257,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本周有个比较有趣的内容：利用重复使用key的流加密密文，来破解目标密文。 经过分析和代码实现，收获颇丰。
+          <p>在学习网络安全及密码学的时候，“很难避免”需要学习一些数论的知识。而今天恰好看到了域中的多项式运算，就顺带复习下欧拉算法吧。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2016/03/17/stream-cipher-xor/#more" rel="contents">
+              <a class="btn" href="/2016/03/22/before-2020-ex-eucli-alg-md/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -284,7 +284,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/10/19/diary151019/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2016/03/17/before-2020-stream-cipher-xor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -298,7 +298,104 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/10/19/diary151019/" class="post-title-link" itemprop="url">赶在DDL前</a>
+            <a href="/2016/03/17/before-2020-stream-cipher-xor/" class="post-title-link" itemprop="url">流加密算法XOR解密</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-17 23:36:05" itemprop="dateCreated datePublished" datetime="2016-03-17T23:36:05-07:00">2016-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Crytography/" itemprop="url" rel="index">
+                    <span itemprop="name">Crytography</span>
+                  </a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/03/17/before-2020-stream-cipher-xor/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/17/before-2020-stream-cipher-xor/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>本周有个比较有趣的内容：利用重复使用key的流加密密文，来破解目标密文。 经过分析和代码实现，收获颇丰。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/03/17/before-2020-stream-cipher-xor/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/10/19/before-2020-diary151019/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="Jason Ye">
+      <meta itemprop="description" content="Programmer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hacking my life">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/19/before-2020-diary151019/" class="post-title-link" itemprop="url">赶在DDL前</a>
         </h1>
 
         <div class="post-meta">
@@ -315,7 +412,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -338,8 +435,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/10/19/diary151019/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/19/diary151019/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/10/19/before-2020-diary151019/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/19/before-2020-diary151019/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -358,7 +455,7 @@
 <p>原本对于这个博客的定位是科技和技术类的博客，没想到过了那么一两个月下来，最终还是变成了定期的思想报告。实在不知是好是坏。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/10/19/diary151019/#more" rel="contents">
+              <a class="btn" href="/2015/10/19/before-2020-diary151019/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -382,7 +479,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/09/20/diary150920/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/09/20/before-2020-diary150920/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -396,7 +493,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/09/20/diary150920/" class="post-title-link" itemprop="url">平衡</a>
+            <a href="/2015/09/20/before-2020-diary150920/" class="post-title-link" itemprop="url">平衡</a>
         </h1>
 
         <div class="post-meta">
@@ -413,7 +510,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -436,8 +533,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/09/20/diary150920/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/diary150920/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/09/20/before-2020-diary150920/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/09/20/before-2020-diary150920/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -456,7 +553,7 @@
 <p>　　在18号，终于举办了ADC第一次企业参观活动，目的地是南方软件园。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/09/20/diary150920/#more" rel="contents">
+              <a class="btn" href="/2015/09/20/before-2020-diary150920/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -480,7 +577,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/08/28/different-version-python-on-windows/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/08/28/before-2020-different-version-python-on-windows/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -494,7 +591,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/28/different-version-python-on-windows/" class="post-title-link" itemprop="url">Windows不同Python版本切换</a>
+            <a href="/2015/08/28/before-2020-different-version-python-on-windows/" class="post-title-link" itemprop="url">Windows不同Python版本切换</a>
         </h1>
 
         <div class="post-meta">
@@ -511,7 +608,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
 
           
@@ -523,8 +620,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/08/28/different-version-python-on-windows/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/28/different-version-python-on-windows/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/08/28/before-2020-different-version-python-on-windows/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/28/before-2020-different-version-python-on-windows/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -542,7 +639,7 @@
           <p>　　最近为了做一个tornado的web项目，又安装起了python2.7，所以导致系统中存在了两个python的版本（3.4 和 2.7）。但是我又不想因为这个就做这个项目把原来的python3.4给删除了，所以想找一个更好的办法解决咯。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/08/28/different-version-python-on-windows/#more" rel="contents">
+              <a class="btn" href="/2015/08/28/before-2020-different-version-python-on-windows/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -566,7 +663,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/08/26/diary150826/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/08/26/before-2020-diary150826/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -580,7 +677,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/08/26/diary150826/" class="post-title-link" itemprop="url">挑战</a>
+            <a href="/2015/08/26/before-2020-diary150826/" class="post-title-link" itemprop="url">挑战</a>
         </h1>
 
         <div class="post-meta">
@@ -597,7 +694,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -620,8 +717,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/08/26/diary150826/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/26/diary150826/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/08/26/before-2020-diary150826/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/08/26/before-2020-diary150826/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -639,7 +736,7 @@
           <p>　 　 ## 还不错 　　转眼间就到了大三，都还没来得及和大二说再见。 　　一回来，就开始忙活ADC的活，从部长招新，到各种和同事讨论将来的发展，也算是自己的一次尝试吧——把一个社团从无到有建设起来，而且同时还要照顾好自己的学业，感觉又是艰辛的一年。 　　从17号开始上课，同时还得准备着招新的面试，需要两头忙吧。到了20号一期课程告一段落后，21号就正式面试新的部长们吧。 　　面试长达三个钟，也是蛮疲劳的。不过，面试的“部长”们都很有想法，而且对ADC的归属感可以用莫名的责任感来形容，实在令我感动。而最后在艰难的决定下，总算确定了名单。 　　这一切还不错吧~
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/08/26/diary150826/#more" rel="contents">
+              <a class="btn" href="/2015/08/26/before-2020-diary150826/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -663,7 +760,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/24/js-note-3/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/24/before-2020-js-note-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -677,7 +774,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/24/js-note-3/" class="post-title-link" itemprop="url">【Js学习笔记】（3）正则表达式</a>
+            <a href="/2015/07/24/before-2020-js-note-3/" class="post-title-link" itemprop="url">【Js学习笔记】（3）正则表达式</a>
         </h1>
 
         <div class="post-meta">
@@ -694,7 +791,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -717,8 +814,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/07/24/js-note-3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/24/js-note-3/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/07/24/before-2020-js-note-3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/24/before-2020-js-note-3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -737,7 +834,7 @@
 <p>正则表达式，英文是Regular expression，常缩写为regex或者regexp，
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/07/24/js-note-3/#more" rel="contents">
+              <a class="btn" href="/2015/07/24/before-2020-js-note-3/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -761,7 +858,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/18/js-note-2/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/18/before-2020-js-note-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -775,7 +872,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/18/js-note-2/" class="post-title-link" itemprop="url">【Js学习笔记】（2）函数式编程</a>
+            <a href="/2015/07/18/before-2020-js-note-2/" class="post-title-link" itemprop="url">【Js学习笔记】（2）函数式编程</a>
         </h1>
 
         <div class="post-meta">
@@ -792,7 +889,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -815,8 +912,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/07/18/js-note-2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/18/js-note-2/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/07/18/before-2020-js-note-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/18/before-2020-js-note-2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -834,7 +931,7 @@
           <p>上一篇主要讲述了Js的基本情况以及它的数据类型，而这一篇就开始讲Js的函数部分。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/07/18/js-note-2/#more" rel="contents">
+              <a class="btn" href="/2015/07/18/before-2020-js-note-2/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -858,7 +955,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/13/js-note-1/">
+    <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/07/13/before-2020-js-note-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
@@ -872,7 +969,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2015/07/13/js-note-1/" class="post-title-link" itemprop="url">【Js学习笔记】（1）温故知新</a>
+            <a href="/2015/07/13/before-2020-js-note-1/" class="post-title-link" itemprop="url">【Js学习笔记】（1）温故知新</a>
         </h1>
 
         <div class="post-meta">
@@ -889,7 +986,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-01-18 22:05:27" itemprop="dateModified" datetime="2020-01-18T22:05:27-08:00">2020-01-18</time>
+                <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -912,8 +1009,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2015/07/13/js-note-1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/13/js-note-1/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2015/07/13/before-2020-js-note-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/07/13/before-2020-js-note-1/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -934,7 +1031,7 @@
 <p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2015/07/13/js-note-1/#more" rel="contents">
+              <a class="btn" href="/2015/07/13/before-2020-js-note-1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1026,7 +1123,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1038,7 +1135,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
