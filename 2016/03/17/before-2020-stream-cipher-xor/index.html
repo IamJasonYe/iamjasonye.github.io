@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,38 +13,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://jasonye.xyz').hostname,
-    root: '/',
-    scheme: 'Pisces',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jasonye.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="本周有个比较有趣的内容：利用重复使用key的流加密密文，来破解目标密文。 经过分析和代码实现，收获颇丰。">
 <meta property="og:type" content="article">
@@ -71,8 +45,9 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
   };
 </script>
 
@@ -124,18 +99,6 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hacking my life</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">My blog</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -143,35 +106,54 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hacking my life</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Jason Ye 's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -187,14 +169,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2016/03/17/before-2020-stream-cipher-xor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,7 +195,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
@@ -222,38 +203,22 @@
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
                 <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Crytography/" itemprop="url" rel="index">
-                    <span itemprop="name">Crytography</span>
-                  </a>
+                  <a href="/categories/Crytography/" itemprop="url" rel="index"><span itemprop="name">Crytography</span></a>
                 </span>
             </span>
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2016/03/17/before-2020-stream-cipher-xor/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/03/17/before-2020-stream-cipher-xor/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -264,7 +229,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本周有个比较有趣的内容：利用重复使用key的流加密密文，来破解目标密文。 经过分析和代码实现，收获颇丰。<a id="more"></a></p>
+        <p>本周有个比较有趣的内容：利用重复使用key的流加密密文，来破解目标密文。 经过分析和代码实现，收获颇丰。<span id="more"></span></p>
 <h2 id="理解加密解密算法">1. 理解加密解密算法</h2>
 <p>题目是要求我们利用多条密文( <span class="math inline">\(c\_{i}\)</span> ,i∈[1,10])来破译目标密文(p)，而已有的密文是利用stream cypher(<span class="math inline">\(E\_k\)</span>)来进行加密，加密用的密钥(k)是重复使用的。 同时，stream cypher是理论课上讲的XOR（异或）运算的加密，即利用一个足够长的key与我们的明文p进行一一异或，得到最后的c。即关系如下： <span class="math display">\[c=p ⨁ k\]</span></p>
 <h2 id="分析加密解密过程的突破口">2. 分析加密、解密过程的突破口</h2>
@@ -283,10 +248,10 @@
 <h3 id="c.-利用b得到的k_space完成解密">c. 利用b)得到的<span class="math inline">\(K\_{space}\)</span>完成解密：</h3>
 <p>利用b)得到部分密钥<span class="math inline">\(K\_{space}\)</span>解密与<span class="math inline">\(K\_{space}\)</span>同位置的其他密文的部分字符<span class="math inline">\(C\_{part}\)</span>，并进而猜出上下文的明文<span class="math inline">\(P\_{part}\)</span>，再利用突破口1获得剩下的<span class="math inline">\(K\_{rest}\)</span>，一直循环过程c)，直到得到所有的<span class="math inline">\(K\_{all}\)</span> 利用得到的<span class="math inline">\(K\_{all}\)</span>破译目标密文<span class="math inline">\(C\_{target}\)</span> <span class="math inline">\(P\_{target}\)</span>=<span class="math inline">\(C\_{targe}\)</span> ⨁<span class="math inline">\(K\_{all}\)</span></p>
 <h2 id="实现方案python2.x实现">4. 实现方案（Python2.X实现）</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># Author: Jason Ye</span></span><br><span class="line"><span class="comment"># Time:	2016/03/15</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readInCypherText</span><span class="params">(fileName)</span>:</span></span><br><span class="line">	<span class="string">"""</span></span><br><span class="line"><span class="string">		Read in cypher texts</span></span><br><span class="line"><span class="string">	"""</span>	</span><br><span class="line">	cypherText = []</span><br><span class="line">	<span class="keyword">with</span> open(fileName) <span class="keyword">as</span> f:</span><br><span class="line">		<span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">			cypherText.append(line)</span><br><span class="line">	<span class="keyword">return</span> cypherText</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialKey</span><span class="params">(cypherText)</span>:</span></span><br><span class="line">	maxLen = <span class="number">0</span></span><br><span class="line">	key = []</span><br><span class="line">	<span class="keyword">for</span> text <span class="keyword">in</span> cypherText:</span><br><span class="line">		maxLen = max(maxLen, (len(text)<span class="number">-1</span>)/<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(maxLen):</span><br><span class="line">		key.append(<span class="string">"*"</span>)</span><br><span class="line">	<span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printKey</span><span class="params">(key)</span>:</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">"[Key]"</span> + str(len(key)/<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">for</span> index, key <span class="keyword">in</span> enumerate(key):</span><br><span class="line">		<span class="keyword">if</span>(key == <span class="string">"*"</span>):</span><br><span class="line">			sys.stdout.write(<span class="string">"** "</span>)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			sys.stdout.write(hex(int(key)).replace(<span class="string">"0x"</span>,<span class="string">''</span>)+<span class="string">" "</span>)</span><br><span class="line">		<span class="keyword">if</span>((index+<span class="number">1</span>)%<span class="number">16</span>==<span class="number">0</span>):</span><br><span class="line">			<span class="keyword">print</span> <span class="string">''</span></span><br><span class="line">	<span class="keyword">print</span><span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span><span class="params">(key, ct)</span>:</span></span><br><span class="line">	pt = <span class="string">''</span></span><br><span class="line">	lenOfCT = len(ct) - <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> ptr <span class="keyword">in</span> range(<span class="number">0</span>,lenOfCT,<span class="number">2</span>):</span><br><span class="line">		c = ct[ptr] + ct[ptr+<span class="number">1</span>]</span><br><span class="line">		c = int(c,<span class="number">16</span>)</span><br><span class="line">		<span class="keyword">if</span>(key[ptr/<span class="number">2</span>] != <span class="string">"*"</span>):</span><br><span class="line">			sys.stdout.write(chr(c^int(key[ptr/<span class="number">2</span>])))</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			sys.stdout.write(<span class="string">"*"</span>)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">''</span></span><br><span class="line">	sys.stdout.flush()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getKey</span><span class="params">(ct, pos, p)</span>:</span></span><br><span class="line">	a = int(ct[pos*<span class="number">2</span>] + ct[pos*<span class="number">2</span>+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">	k = a ^ ord(p)</span><br><span class="line">	<span class="keyword">return</span> k</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	cypherText = readInCypherText(<span class="string">"cypherText.txt"</span>)</span><br><span class="line">	key = initialKey(cypherText)</span><br><span class="line">	printKey(key)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#Find K(space)</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> cypherText:</span><br><span class="line">		lenOfText = len(i) - <span class="number">1</span></span><br><span class="line">		<span class="keyword">print</span> <span class="string">"[Length] "</span> + str(cypherText.index(i)) + <span class="string">": "</span> +str(lenOfText/<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">for</span> ptr <span class="keyword">in</span> range(<span class="number">0</span>,lenOfText,<span class="number">2</span>):</span><br><span class="line">			<span class="comment"># sys.stdout.write(i[ptr]+i[ptr+1]+" ")</span></span><br><span class="line">			isSpace = <span class="literal">True</span></span><br><span class="line">			a = int(i[ptr] + i[ptr+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">			<span class="keyword">for</span> j <span class="keyword">in</span> cypherText:</span><br><span class="line">				jLen = len(j)</span><br><span class="line">				<span class="keyword">if</span>(i!=j <span class="keyword">and</span> ptr+<span class="number">1</span> &lt; jLen):</span><br><span class="line">					b = int(j[ptr] + j[ptr+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">					c = a ^ b</span><br><span class="line">					<span class="keyword">if</span>(<span class="keyword">not</span> str.isalpha(chr(c))):</span><br><span class="line">						isSpace = <span class="literal">False</span></span><br><span class="line">				<span class="keyword">elif</span>(ptr+<span class="number">1</span>&gt;jLen):</span><br><span class="line">					isSpace = <span class="literal">False</span></span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">not</span> isSpace):</span><br><span class="line">				<span class="comment"># sys.stdout.write(i[ptr]+i[ptr+1]+" ")</span></span><br><span class="line">				<span class="keyword">pass</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				<span class="comment"># sys.stdout.write("__ ")</span></span><br><span class="line">				key[ptr/<span class="number">2</span>] = str(a ^ <span class="number">0x20</span>)</span><br><span class="line">			<span class="keyword">if</span>((ptr+<span class="number">2</span>) % <span class="number">32</span> == <span class="number">0</span>):</span><br><span class="line">				<span class="keyword">print</span><span class="string">''</span></span><br><span class="line">		<span class="keyword">print</span> <span class="string">''</span></span><br><span class="line"></span><br><span class="line">	printKey(key)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># Print current plaintext deciphered</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">190</span>):</span><br><span class="line">		sys.stdout.write(str(i%<span class="number">10</span>))</span><br><span class="line">	<span class="keyword">print</span> <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> ct <span class="keyword">in</span> cypherText:</span><br><span class="line">		decrypt(key, ct)</span><br><span class="line">	<span class="keyword">print</span> <span class="string">"\n"</span></span><br><span class="line">	sys.stdout.flush()</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># Guess</span></span><br><span class="line">	<span class="keyword">with</span> open(<span class="string">"log.txt"</span>,<span class="string">'w'</span>) <span class="keyword">as</span> log: <span class="comment"># Log down the decryption to file in case some guesses are not right</span></span><br><span class="line">		<span class="keyword">try</span>:</span><br><span class="line">			<span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">				<span class="keyword">try</span>: <span class="comment"># Preventing invalid input</span></span><br><span class="line">					line, pos, p = raw_input().split()</span><br><span class="line">				<span class="keyword">except</span>:</span><br><span class="line">					<span class="keyword">print</span> <span class="string">"Invalid input! Input again"</span></span><br><span class="line">					sys.stdout.flush()</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				<span class="keyword">if</span>(p == <span class="string">"*"</span>): <span class="comment"># Undo the guess</span></span><br><span class="line">					key[int(pos)] = <span class="string">"*"</span></span><br><span class="line">					<span class="keyword">print</span> <span class="string">"Key revised\n\n"</span></span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				<span class="keyword">elif</span>(p == <span class="string">"done"</span>):</span><br><span class="line">					<span class="keyword">break</span></span><br><span class="line">				sys.stdout.write(line + <span class="string">"line: "</span> + pos+<span class="string">" "</span>+p +<span class="string">'\n'</span>)</span><br><span class="line">				log.write(line + <span class="string">" "</span> + pos + <span class="string">" "</span> + p + <span class="string">"\n"</span>)</span><br><span class="line">				key[int(pos)] = getKey(cypherText[int(line)], int(pos), p)</span><br><span class="line">				<span class="comment"># Print the header of number</span></span><br><span class="line">				<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">190</span>):</span><br><span class="line">					sys.stdout.write(str(i%<span class="number">10</span>))</span><br><span class="line">				<span class="keyword">print</span> <span class="string">''</span></span><br><span class="line">				<span class="comment"># Print current plain text deciphered</span></span><br><span class="line">				<span class="keyword">for</span> ct <span class="keyword">in</span> cypherText:</span><br><span class="line">					decrypt(key, ct)</span><br><span class="line">				<span class="keyword">print</span> <span class="string">"\n\n"</span></span><br><span class="line"></span><br><span class="line">				<span class="comment"># Print current key</span></span><br><span class="line">				printKey(key)</span><br><span class="line">				sys.stdout.flush()</span><br><span class="line">		<span class="keyword">except</span>:</span><br><span class="line">			<span class="keyword">pass</span></span><br><span class="line">	targetCypherText =  <span class="string">"32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e9052ba6a8cd8257bf14d13e6f0a803b54fde9e77472dbff89d71b57bddef121336cb85ccb8f3315f4b52e301d16e9f52f904"</span></span><br><span class="line">	<span class="keyword">print</span> <span class="string">"Target CypherText:"</span></span><br><span class="line">	decrypt(key, targetCypherText)</span><br><span class="line">	raw_input()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># Author: Jason Ye</span></span><br><span class="line"><span class="comment"># Time:	2016/03/15</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readInCypherText</span>(<span class="params">fileName</span>):</span></span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">		Read in cypher texts</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span>	</span><br><span class="line">	cypherText = []</span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(fileName) <span class="keyword">as</span> f:</span><br><span class="line">		<span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">			cypherText.append(line)</span><br><span class="line">	<span class="keyword">return</span> cypherText</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialKey</span>(<span class="params">cypherText</span>):</span></span><br><span class="line">	maxLen = <span class="number">0</span></span><br><span class="line">	key = []</span><br><span class="line">	<span class="keyword">for</span> text <span class="keyword">in</span> cypherText:</span><br><span class="line">		maxLen = <span class="built_in">max</span>(maxLen, (<span class="built_in">len</span>(text)-<span class="number">1</span>)/<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(maxLen):</span><br><span class="line">		key.append(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">	<span class="keyword">return</span> key</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printKey</span>(<span class="params">key</span>):</span></span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;[Key]&quot;</span> + <span class="built_in">str</span>(<span class="built_in">len</span>(key)/<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">for</span> index, key <span class="keyword">in</span> <span class="built_in">enumerate</span>(key):</span><br><span class="line">		<span class="keyword">if</span>(key == <span class="string">&quot;*&quot;</span>):</span><br><span class="line">			sys.stdout.write(<span class="string">&quot;** &quot;</span>)</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			sys.stdout.write(<span class="built_in">hex</span>(<span class="built_in">int</span>(key)).replace(<span class="string">&quot;0x&quot;</span>,<span class="string">&#x27;&#x27;</span>)+<span class="string">&quot; &quot;</span>)</span><br><span class="line">		<span class="keyword">if</span>((index+<span class="number">1</span>)%<span class="number">16</span>==<span class="number">0</span>):</span><br><span class="line">			<span class="built_in">print</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="built_in">print</span><span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decrypt</span>(<span class="params">key, ct</span>):</span></span><br><span class="line">	pt = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	lenOfCT = <span class="built_in">len</span>(ct) - <span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> ptr <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,lenOfCT,<span class="number">2</span>):</span><br><span class="line">		c = ct[ptr] + ct[ptr+<span class="number">1</span>]</span><br><span class="line">		c = <span class="built_in">int</span>(c,<span class="number">16</span>)</span><br><span class="line">		<span class="keyword">if</span>(key[ptr/<span class="number">2</span>] != <span class="string">&quot;*&quot;</span>):</span><br><span class="line">			sys.stdout.write(<span class="built_in">chr</span>(c^<span class="built_in">int</span>(key[ptr/<span class="number">2</span>])))</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			sys.stdout.write(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">	sys.stdout.flush()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getKey</span>(<span class="params">ct, pos, p</span>):</span></span><br><span class="line">	a = <span class="built_in">int</span>(ct[pos*<span class="number">2</span>] + ct[pos*<span class="number">2</span>+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">	k = a ^ <span class="built_in">ord</span>(p)</span><br><span class="line">	<span class="keyword">return</span> k</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">	cypherText = readInCypherText(<span class="string">&quot;cypherText.txt&quot;</span>)</span><br><span class="line">	key = initialKey(cypherText)</span><br><span class="line">	printKey(key)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#Find K(space)</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> cypherText:</span><br><span class="line">		lenOfText = <span class="built_in">len</span>(i) - <span class="number">1</span></span><br><span class="line">		<span class="built_in">print</span> <span class="string">&quot;[Length] &quot;</span> + <span class="built_in">str</span>(cypherText.index(i)) + <span class="string">&quot;: &quot;</span> +<span class="built_in">str</span>(lenOfText/<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">for</span> ptr <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,lenOfText,<span class="number">2</span>):</span><br><span class="line">			<span class="comment"># sys.stdout.write(i[ptr]+i[ptr+1]+&quot; &quot;)</span></span><br><span class="line">			isSpace = <span class="literal">True</span></span><br><span class="line">			a = <span class="built_in">int</span>(i[ptr] + i[ptr+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">			<span class="keyword">for</span> j <span class="keyword">in</span> cypherText:</span><br><span class="line">				jLen = <span class="built_in">len</span>(j)</span><br><span class="line">				<span class="keyword">if</span>(i!=j <span class="keyword">and</span> ptr+<span class="number">1</span> &lt; jLen):</span><br><span class="line">					b = <span class="built_in">int</span>(j[ptr] + j[ptr+<span class="number">1</span>],<span class="number">16</span>)</span><br><span class="line">					c = a ^ b</span><br><span class="line">					<span class="keyword">if</span>(<span class="keyword">not</span> <span class="built_in">str</span>.isalpha(<span class="built_in">chr</span>(c))):</span><br><span class="line">						isSpace = <span class="literal">False</span></span><br><span class="line">				<span class="keyword">elif</span>(ptr+<span class="number">1</span>&gt;jLen):</span><br><span class="line">					isSpace = <span class="literal">False</span></span><br><span class="line">			<span class="keyword">if</span>(<span class="keyword">not</span> isSpace):</span><br><span class="line">				<span class="comment"># sys.stdout.write(i[ptr]+i[ptr+1]+&quot; &quot;)</span></span><br><span class="line">				<span class="keyword">pass</span></span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				<span class="comment"># sys.stdout.write(&quot;__ &quot;)</span></span><br><span class="line">				key[ptr/<span class="number">2</span>] = <span class="built_in">str</span>(a ^ <span class="number">0x20</span>)</span><br><span class="line">			<span class="keyword">if</span>((ptr+<span class="number">2</span>) % <span class="number">32</span> == <span class="number">0</span>):</span><br><span class="line">				<span class="built_in">print</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">		<span class="built_in">print</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">	printKey(key)</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># Print current plaintext deciphered</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">190</span>):</span><br><span class="line">		sys.stdout.write(<span class="built_in">str</span>(i%<span class="number">10</span>))</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">for</span> ct <span class="keyword">in</span> cypherText:</span><br><span class="line">		decrypt(key, ct)</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;\n&quot;</span></span><br><span class="line">	sys.stdout.flush()</span><br><span class="line">	</span><br><span class="line">	<span class="comment"># Guess</span></span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;log.txt&quot;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> log: <span class="comment"># Log down the decryption to file in case some guesses are not right</span></span><br><span class="line">		<span class="keyword">try</span>:</span><br><span class="line">			<span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">				<span class="keyword">try</span>: <span class="comment"># Preventing invalid input</span></span><br><span class="line">					line, pos, p = raw_input().split()</span><br><span class="line">				<span class="keyword">except</span>:</span><br><span class="line">					<span class="built_in">print</span> <span class="string">&quot;Invalid input! Input again&quot;</span></span><br><span class="line">					sys.stdout.flush()</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				<span class="keyword">if</span>(p == <span class="string">&quot;*&quot;</span>): <span class="comment"># Undo the guess</span></span><br><span class="line">					key[<span class="built_in">int</span>(pos)] = <span class="string">&quot;*&quot;</span></span><br><span class="line">					<span class="built_in">print</span> <span class="string">&quot;Key revised\n\n&quot;</span></span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				<span class="keyword">elif</span>(p == <span class="string">&quot;done&quot;</span>):</span><br><span class="line">					<span class="keyword">break</span></span><br><span class="line">				sys.stdout.write(line + <span class="string">&quot;line: &quot;</span> + pos+<span class="string">&quot; &quot;</span>+p +<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">				log.write(line + <span class="string">&quot; &quot;</span> + pos + <span class="string">&quot; &quot;</span> + p + <span class="string">&quot;\n&quot;</span>)</span><br><span class="line">				key[<span class="built_in">int</span>(pos)] = getKey(cypherText[<span class="built_in">int</span>(line)], <span class="built_in">int</span>(pos), p)</span><br><span class="line">				<span class="comment"># Print the header of number</span></span><br><span class="line">				<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">190</span>):</span><br><span class="line">					sys.stdout.write(<span class="built_in">str</span>(i%<span class="number">10</span>))</span><br><span class="line">				<span class="built_in">print</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line">				<span class="comment"># Print current plain text deciphered</span></span><br><span class="line">				<span class="keyword">for</span> ct <span class="keyword">in</span> cypherText:</span><br><span class="line">					decrypt(key, ct)</span><br><span class="line">				<span class="built_in">print</span> <span class="string">&quot;\n\n&quot;</span></span><br><span class="line"></span><br><span class="line">				<span class="comment"># Print current key</span></span><br><span class="line">				printKey(key)</span><br><span class="line">				sys.stdout.flush()</span><br><span class="line">		<span class="keyword">except</span>:</span><br><span class="line">			<span class="keyword">pass</span></span><br><span class="line">	targetCypherText =  <span class="string">&quot;32510ba9babebbbefd001547a810e67149caee11d945cd7fc81a05e9f85aac650e9052ba6a8cd8257bf14d13e6f0a803b54fde9e77472dbff89d71b57bddef121336cb85ccb8f3315f4b52e301d16e9f52f904&quot;</span></span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;Target CypherText:&quot;</span></span><br><span class="line">	decrypt(key, targetCypherText)</span><br><span class="line">	raw_input()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">	main()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="下面是加密的密文用于猜解密钥">下面是加密的密文，用于猜解密钥</h3>
-<figure class="highlight plain"><figcaption><span>cypheredText.txt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e</span><br><span class="line">234c02ecbbfbafa3ed18510abd11fa724fcda2018a1a8342cf064bbde548b12b07df44ba7191d9606ef4081ffde5ad46a5069d9f7f543bedb9c861bf29c7e205132eda9382b0bc2c5c4b45f919cf3a9f1cb74151f6d551f4480c82b2cb24cc5b028aa76eb7b4ab24171ab3cdadb8356f</span><br><span class="line">32510ba9a7b2bba9b8005d43a304b5714cc0bb0c8a34884dd91304b8ad40b62b07df44ba6e9d8a2368e51d04e0e7b207b70b9b8261112bacb6c866a232dfe257527dc29398f5f3251a0d47e503c66e935de81230b59b7afb5f41afa8d661cb</span><br><span class="line">32510ba9aab2a8a4fd06414fb517b5605cc0aa0dc91a8908c2064ba8ad5ea06a029056f47a8ad3306ef5021eafe1ac01a81197847a5c68a1b78769a37bc8f4575432c198ccb4ef63590256e305cd3a9544ee4160ead45aef520489e7da7d835402bca670bda8eb775200b8dabbba246b130f040d8ec6447e2c767f3d30ed81ea2e4c1404e1315a1010e7229be6636aaa</span><br><span class="line">3f561ba9adb4b6ebec54424ba317b564418fac0dd35f8c08d31a1fe9e24fe56808c213f17c81d9607cee021dafe1e001b21ade877a5e68bea88d61b93ac5ee0d562e8e9582f5ef375f0a4ae20ed86e935de81230b59b73fb4302cd95d770c65b40aaa065f2a5e33a5a0bb5dcaba43722130f042f8ec85b7c2070</span><br><span class="line">32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd2061bbde24eb76a19d84aba34d8de287be84d07e7e9a30ee714979c7e1123a8bd9822a33ecaf512472e8e8f8db3f9635c1949e640c621854eba0d79eccf52ff111284b4cc61d11902aebc66f2b2e436434eacc0aba938220b084800c2ca4e693522643573b2c4ce35050b0cf774201f0fe52ac9f26d71b6cf61a711cc229f77ace7aa88a2f19983122b11be87a59c355d25f8e4</span><br><span class="line">32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd90f1fa6ea5ba47b01c909ba7696cf606ef40c04afe1ac0aa8148dd066592ded9f8774b529c7ea125d298e8883f5e9305f4b44f915cb2bd05af51373fd9b4af511039fa2d96f83414aaaf261bda2e97b170fb5cce2a53e675c154c0d9681596934777e2275b381ce2e40582afe67650b13e72287ff2270abcf73bb028932836fbdecfecee0a3b894473c1bbeb6b4913a536ce4f9b13f1efff71ea313c8661dd9a4ce</span><br><span class="line">315c4eeaa8b5f8bffd11155ea506b56041c6a00c8a08854dd21a4bbde54ce56801d943ba708b8a3574f40c00fff9e00fa1439fd0654327a3bfc860b92f89ee04132ecb9298f5fd2d5e4b45e40ecc3b9d59e9417df7c95bba410e9aa2ca24c5474da2f276baa3ac325918b2daada43d6712150441c2e04f6565517f317da9d3</span><br><span class="line">271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad6e04d513e96d99de2569bc5e50eeeca709b50a8a987f4264edb6896fb537d0a716132ddc938fb0f836480e06ed0fcd6e9759f40462f9cf57f4564186a2c1778f1543efa270bda5e933421cbe88a4a52222190f471e9bd15f652b653b7071aec59a2705081ffe72651d08f822c9ed6d76e48b63ab15d0208573a7eef027</span><br><span class="line">466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><figcaption><span>Result</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">We can factor the number 15 with quantum computers. We can also factor the number 15 with a dog trained to bark three times - Robert Harley</span><br><span class="line">Euler would probably enjoy that now his theorem becomes a corner stone of crypto - Annonymous on Euler&#39;s theorem</span><br><span class="line">The nice thing about Keeyloq is now we cryptographers can drive a lot of fancy cars - Dan Boneh</span><br><span class="line">The ciphertext produced by a weak encryption algorithm looks as good as ciphertext produced by a strong encryption algorithm - Philip Zimmermann</span><br><span class="line">You don&#39;t want to buy a set of car keys from a guy who specializes in stealing cars - Marc Rotenberg commenting on Clipper</span><br><span class="line">There are two types of cryptography - that which will keep secrets safe from your little sister, and that which will keep secrets safe from your government - Bruce*Schn****</span><br><span class="line">There are two types of cyptography: one that allows the Government to use brute force to break the code, and one that requires the Government to use brute force to*brea******************</span><br><span class="line">We can see the point where the chip is unhappy if a wrong bit is sent and consumes more power from the environment - Adi Shamir</span><br><span class="line">A (private-key)  encryption scheme states 3 algorithms, namely a procedure for generating keys, a procedure for encrypting, and a procedure for decrypting.</span><br><span class="line"> The Concise OxfordDictionary (2006) de铿乶es crypto as the art of  writing o r solving codes.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>cypheredText.txt</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">315c4eeaa8b5f8aaf9174145bf43e1784b8fa00dc71d885a804e5ee9fa40b16349c146fb778cdf2d3aff021dfff5b403b510d0d0455468aeb98622b137dae857553ccd8883a7bc37520e06e515d22c954eba5025b8cc57ee59418ce7dc6bc41556bdb36bbca3e8774301fbcaa3b83b220809560987815f65286764703de0f3d524400a19b159610b11ef3e</span><br><span class="line">234c02ecbbfbafa3ed18510abd11fa724fcda2018a1a8342cf064bbde548b12b07df44ba7191d9606ef4081ffde5ad46a5069d9f7f543bedb9c861bf29c7e205132eda9382b0bc2c5c4b45f919cf3a9f1cb74151f6d551f4480c82b2cb24cc5b028aa76eb7b4ab24171ab3cdadb8356f</span><br><span class="line">32510ba9a7b2bba9b8005d43a304b5714cc0bb0c8a34884dd91304b8ad40b62b07df44ba6e9d8a2368e51d04e0e7b207b70b9b8261112bacb6c866a232dfe257527dc29398f5f3251a0d47e503c66e935de81230b59b7afb5f41afa8d661cb</span><br><span class="line">32510ba9aab2a8a4fd06414fb517b5605cc0aa0dc91a8908c2064ba8ad5ea06a029056f47a8ad3306ef5021eafe1ac01a81197847a5c68a1b78769a37bc8f4575432c198ccb4ef63590256e305cd3a9544ee4160ead45aef520489e7da7d835402bca670bda8eb775200b8dabbba246b130f040d8ec6447e2c767f3d30ed81ea2e4c1404e1315a1010e7229be6636aaa</span><br><span class="line">3f561ba9adb4b6ebec54424ba317b564418fac0dd35f8c08d31a1fe9e24fe56808c213f17c81d9607cee021dafe1e001b21ade877a5e68bea88d61b93ac5ee0d562e8e9582f5ef375f0a4ae20ed86e935de81230b59b73fb4302cd95d770c65b40aaa065f2a5e33a5a0bb5dcaba43722130f042f8ec85b7c2070</span><br><span class="line">32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd2061bbde24eb76a19d84aba34d8de287be84d07e7e9a30ee714979c7e1123a8bd9822a33ecaf512472e8e8f8db3f9635c1949e640c621854eba0d79eccf52ff111284b4cc61d11902aebc66f2b2e436434eacc0aba938220b084800c2ca4e693522643573b2c4ce35050b0cf774201f0fe52ac9f26d71b6cf61a711cc229f77ace7aa88a2f19983122b11be87a59c355d25f8e4</span><br><span class="line">32510bfbacfbb9befd54415da243e1695ecabd58c519cd4bd90f1fa6ea5ba47b01c909ba7696cf606ef40c04afe1ac0aa8148dd066592ded9f8774b529c7ea125d298e8883f5e9305f4b44f915cb2bd05af51373fd9b4af511039fa2d96f83414aaaf261bda2e97b170fb5cce2a53e675c154c0d9681596934777e2275b381ce2e40582afe67650b13e72287ff2270abcf73bb028932836fbdecfecee0a3b894473c1bbeb6b4913a536ce4f9b13f1efff71ea313c8661dd9a4ce</span><br><span class="line">315c4eeaa8b5f8bffd11155ea506b56041c6a00c8a08854dd21a4bbde54ce56801d943ba708b8a3574f40c00fff9e00fa1439fd0654327a3bfc860b92f89ee04132ecb9298f5fd2d5e4b45e40ecc3b9d59e9417df7c95bba410e9aa2ca24c5474da2f276baa3ac325918b2daada43d6712150441c2e04f6565517f317da9d3</span><br><span class="line">271946f9bbb2aeadec111841a81abc300ecaa01bd8069d5cc91005e9fe4aad6e04d513e96d99de2569bc5e50eeeca709b50a8a987f4264edb6896fb537d0a716132ddc938fb0f836480e06ed0fcd6e9759f40462f9cf57f4564186a2c1778f1543efa270bda5e933421cbe88a4a52222190f471e9bd15f652b653b7071aec59a2705081ffe72651d08f822c9ed6d76e48b63ab15d0208573a7eef027</span><br><span class="line">466d06ece998b7a2fb1d464fed2ced7641ddaa3cc31c9941cf110abbf409ed39598005b3399ccfafb61d0315fca0a314be138a9f32503bedac8067f03adbf3575c3b8edc9ba7f537530541ab0f9f3cd04ff50d66f1d559ba520e89a2cb2a83</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>Result</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">We can factor the number 15 with quantum computers. We can also factor the number 15 with a dog trained to bark three times - Robert Harley</span><br><span class="line">Euler would probably enjoy that now his theorem becomes a corner stone of crypto - Annonymous on Euler&#x27;s theorem</span><br><span class="line">The nice thing about Keeyloq is now we cryptographers can drive a lot of fancy cars - Dan Boneh</span><br><span class="line">The ciphertext produced by a weak encryption algorithm looks as good as ciphertext produced by a strong encryption algorithm - Philip Zimmermann</span><br><span class="line">You don&#x27;t want to buy a set of car keys from a guy who specializes in stealing cars - Marc Rotenberg commenting on Clipper</span><br><span class="line">There are two types of cryptography - that which will keep secrets safe from your little sister, and that which will keep secrets safe from your government - Bruce*Schn****</span><br><span class="line">There are two types of cyptography: one that allows the Government to use brute force to break the code, and one that requires the Government to use brute force to*brea******************</span><br><span class="line">We can see the point where the chip is unhappy if a wrong bit is sent and consumes more power from the environment - Adi Shamir</span><br><span class="line">A (private-key)  encryption scheme states 3 algorithms, namely a procedure for generating keys, a procedure for encrypting, and a procedure for decrypting.</span><br><span class="line"> The Concise OxfordDictionary (2006) de铿乶es crypto as the art of  writing o r solving codes.</span><br></pre></td></tr></table></figure>
 <h3 id="最后key及目标密文的明文">最后Key及目标密文的明文</h3>
 <p><img src="/img/2016/03/18/key.png" alt="key" /> <img src="/img/2016/03/18/pt.png" alt="pt" /></p>
 
@@ -324,22 +289,14 @@
   
   
 
-  </div>
 
 
           </div>
           
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -382,7 +339,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解加密解密算法"><span class="nav-number">1.</span> <span class="nav-text">1. 理解加密解密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析加密解密过程的突破口"><span class="nav-number">2.</span> <span class="nav-text">2. 分析加密、解密过程的突破口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#突破口1利用xor异或运算的性质"><span class="nav-number">2.1.</span> <span class="nav-text">突破口1：利用XOR（异或）运算的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#突破口2利用重复利用key"><span class="nav-number">2.2.</span> <span class="nav-text">突破口2：利用重复利用key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#突破口3空格字符特性"><span class="nav-number">2.3.</span> <span class="nav-text">突破口3：“空格”字符特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#根据突破口制定相关策略方案或算法"><span class="nav-number">3.</span> <span class="nav-text">3. 根据突破口制定相关策略方案或算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-利用突破口3寻找出可以确定的空格"><span class="nav-number">3.1.</span> <span class="nav-text">a. 利用突破口3寻找出可以确定的空格：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c.-利用b得到的k_space完成解密"><span class="nav-number">3.2.</span> <span class="nav-text">c. 利用b)得到的\(K\_{space}\)完成解密：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现方案python2.x实现"><span class="nav-number">4.</span> <span class="nav-text">4. 实现方案（Python2.X实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下面是加密的密文用于猜解密钥"><span class="nav-number">4.1.</span> <span class="nav-text">下面是加密的密文，用于猜解密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后key及目标密文的明文"><span class="nav-number">4.2.</span> <span class="nav-text">最后Key及目标密文的明文</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%90%86%E8%A7%A3%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1. 理解加密解密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E8%BF%87%E7%A8%8B%E7%9A%84%E7%AA%81%E7%A0%B4%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">2. 分析加密、解密过程的突破口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4%E5%8F%A31%E5%88%A9%E7%94%A8xor%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">2.1.</span> <span class="nav-text">突破口1：利用XOR（异或）运算的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4%E5%8F%A32%E5%88%A9%E7%94%A8%E9%87%8D%E5%A4%8D%E5%88%A9%E7%94%A8key"><span class="nav-number">2.2.</span> <span class="nav-text">突破口2：利用重复利用key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4%E5%8F%A33%E7%A9%BA%E6%A0%BC%E5%AD%97%E7%AC%A6%E7%89%B9%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">突破口3：“空格”字符特性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AE%E7%AA%81%E7%A0%B4%E5%8F%A3%E5%88%B6%E5%AE%9A%E7%9B%B8%E5%85%B3%E7%AD%96%E7%95%A5%E6%96%B9%E6%A1%88%E6%88%96%E7%AE%97%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3. 根据突破口制定相关策略方案或算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a.-%E5%88%A9%E7%94%A8%E7%AA%81%E7%A0%B4%E5%8F%A33%E5%AF%BB%E6%89%BE%E5%87%BA%E5%8F%AF%E4%BB%A5%E7%A1%AE%E5%AE%9A%E7%9A%84%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.1.</span> <span class="nav-text">a. 利用突破口3寻找出可以确定的空格：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#c.-%E5%88%A9%E7%94%A8b%E5%BE%97%E5%88%B0%E7%9A%84k_space%E5%AE%8C%E6%88%90%E8%A7%A3%E5%AF%86"><span class="nav-number">3.2.</span> <span class="nav-text">c. 利用b)得到的\(K\_{space}\)完成解密：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88python2.x%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">4. 实现方案（Python2.X实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E5%8A%A0%E5%AF%86%E7%9A%84%E5%AF%86%E6%96%87%E7%94%A8%E4%BA%8E%E7%8C%9C%E8%A7%A3%E5%AF%86%E9%92%A5"><span class="nav-number">4.1.</span> <span class="nav-text">下面是加密的密文，用于猜解密钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8Ekey%E5%8F%8A%E7%9B%AE%E6%A0%87%E5%AF%86%E6%96%87%E7%9A%84%E6%98%8E%E6%96%87"><span class="nav-number">4.2.</span> <span class="nav-text">最后Key及目标密文的明文</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -417,13 +374,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
@@ -443,19 +397,18 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jason Ye</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
@@ -508,87 +461,6 @@
   
 
   
-      
-<script type="text/x-mathjax-config">
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
-<script>
-  NexT.utils.getScript('//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
-</script>
-
-    
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://jasonye.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "http://jasonye.xyz/2016/03/17/before-2020-stream-cipher-xor/";
-    this.page.identifier = "2016/03/17/before-2020-stream-cipher-xor/";
-    this.page.title = "流加密算法XOR解密";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://jasonye.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
 
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,38 +13,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://jasonye.xyz').hostname,
-    root: '/',
-    scheme: 'Pisces',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jasonye.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="思想 原本对于这个博客的定位是科技和技术类的博客，没想到过了那么一两个月下来，最终还是变成了定期的思想报告。实在不知是好是坏。">
 <meta property="og:type" content="article">
@@ -72,8 +46,9 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
   };
 </script>
 
@@ -125,18 +100,6 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hacking my life</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">My blog</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -144,35 +107,54 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hacking my life</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Jason Ye 's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -188,14 +170,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2015/10/19/before-2020-diary151019/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -215,7 +196,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
@@ -223,38 +204,22 @@
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
                 <time title="Modified: 2020-07-17 01:01:44" itemprop="dateModified" datetime="2020-07-17T01:01:44-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Diary/" itemprop="url" rel="index">
-                    <span itemprop="name">Diary</span>
-                  </a>
+                  <a href="/categories/Diary/" itemprop="url" rel="index"><span itemprop="name">Diary</span></a>
                 </span>
             </span>
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2015/10/19/before-2020-diary151019/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/10/19/before-2020-diary151019/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -266,7 +231,7 @@
 
       
         <h2 id="思想">思想</h2>
-<p>原本对于这个博客的定位是科技和技术类的博客，没想到过了那么一两个月下来，最终还是变成了定期的思想报告。实在不知是好是坏。<a id="more"></a> 还记得在初中的时候，在那个互联网在中国还没有那么发达的时候，大家偶尔都会在自己的博客、空间发一些感慨的文字，畅谈自己近期的看法感悟，让自己的感觉和想法保留下来。 但是慢慢地，随着微博、微信朋友圈等社交工具的出现，对于长篇文字的编写，大家显然没有了这个耐心了吧。能够静下心来码字的人越来越少，大家越发喜欢用图片去表达自己的情感和想法。或许是因为在信息时代吧，信息如同爆炸般出现，大家对于信息都或许都没有那么热衷了，强项于用“粗暴简洁”的方式去获取信息。 而显然，这个在我看来是有危险的。至少在人类没有进化到那种程度，能够不通过文字表达来获得精准的信息表达。如果一个人的文字表达能力逐渐退化的话，那么他的信息传播力就会降低。这是相当危险的感觉。</p>
+<p>原本对于这个博客的定位是科技和技术类的博客，没想到过了那么一两个月下来，最终还是变成了定期的思想报告。实在不知是好是坏。<span id="more"></span> 还记得在初中的时候，在那个互联网在中国还没有那么发达的时候，大家偶尔都会在自己的博客、空间发一些感慨的文字，畅谈自己近期的看法感悟，让自己的感觉和想法保留下来。 但是慢慢地，随着微博、微信朋友圈等社交工具的出现，对于长篇文字的编写，大家显然没有了这个耐心了吧。能够静下心来码字的人越来越少，大家越发喜欢用图片去表达自己的情感和想法。或许是因为在信息时代吧，信息如同爆炸般出现，大家对于信息都或许都没有那么热衷了，强项于用“粗暴简洁”的方式去获取信息。 而显然，这个在我看来是有危险的。至少在人类没有进化到那种程度，能够不通过文字表达来获得精准的信息表达。如果一个人的文字表达能力逐渐退化的话，那么他的信息传播力就会降低。这是相当危险的感觉。</p>
 <h2 id="步入正轨">步入正轨</h2>
 <p>似乎当上这个ADC主任后，我就很少再空闲了下来。在很长的一段时间里，既要忙于工作，又要顾着学业，所以很大程度需要多线操作。 而从近期来看，ADC也算是走上了正轨吧。（非正式）全员大会开了，跟小朋友们分享了ADC2.0的理念，然后第一次沙龙也顺利举办，眼看就是软创的比赛了，还记得去年担任竞赛部部长的时候，我在没有任何指导下把比赛成功举办了，不得不说时间过得真是太快。 <img src="/img/2015/1019/all_adc_members.jpg" alt="非正式全员大会" /> <img src="/img/2015/1019/salon_before.jpg" alt="本学期第一次沙龙" /> <img src="/img/2015/1019/salon_professor.jpg" alt="杨然院长" /> <img src="/img/2015/1019/salon_first_family.jpg" alt="嘉宾工作人员合照" /> 毫无疑问，步入正轨后也感觉自己颇感欣慰，ADC能够一直运作着，老人家和小朋友都能够很好地相处，ADC内部的沟通也变得多了起来。同时，我也慢慢感到自己肩上任务逐渐下放给了我的部长们，所以甚是欣慰吧。</p>
 <h2 id="ddl狂欢夜">DDL狂欢夜</h2>
@@ -305,22 +270,14 @@
   
   
 
-  </div>
 
 
           </div>
           
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -363,7 +320,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#思想"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步入正轨"><span class="nav-number">2.</span> <span class="nav-text">步入正轨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ddl狂欢夜"><span class="nav-number">3.</span> <span class="nav-text">DDL狂欢夜</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E6%83%B3"><span class="nav-number">1.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E5%85%A5%E6%AD%A3%E8%BD%A8"><span class="nav-number">2.</span> <span class="nav-text">步入正轨</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ddl%E7%8B%82%E6%AC%A2%E5%A4%9C"><span class="nav-number">3.</span> <span class="nav-text">DDL狂欢夜</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -398,13 +355,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
@@ -424,19 +378,18 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jason Ye</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
@@ -489,39 +442,6 @@
   
 
   
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://jasonye.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "http://jasonye.xyz/2015/10/19/before-2020-diary151019/";
-    this.page.identifier = "2015/10/19/before-2020-diary151019/";
-    this.page.title = "赶在DDL前";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://jasonye.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
 
 </body>
 </html>

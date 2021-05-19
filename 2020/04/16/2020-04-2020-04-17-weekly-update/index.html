@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -13,38 +13,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    hostname: new URL('http://jasonye.xyz').hostname,
-    root: '/',
-    scheme: 'Pisces',
-    version: '7.7.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    bookmark: {"enable":false,"color":"#222","save":"auto"},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jasonye.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="2020年第十六周">
 <meta property="og:type" content="article">
@@ -70,8 +44,9 @@
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: false,
-    isPost: true
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
   };
 </script>
 
@@ -123,18 +98,6 @@
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hacking my life</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">My blog</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -142,35 +105,54 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hacking my life</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Jason Ye 's blog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
 
 
+
+
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -186,14 +168,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://jasonye.xyz/2020/04/16/2020-04-2020-04-17-weekly-update/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -213,7 +194,7 @@
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
@@ -221,44 +202,26 @@
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
                 <time title="Modified: 2020-07-17 01:01:05" itemprop="dateModified" datetime="2020-07-17T01:01:05-07:00">2020-07-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Diary/" itemprop="url" rel="index">
-                    <span itemprop="name">Diary</span>
-                  </a>
+                  <a href="/categories/Diary/" itemprop="url" rel="index"><span itemprop="name">Diary</span></a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Diary/UCSD/" itemprop="url" rel="index">
-                    <span itemprop="name">UCSD</span>
-                  </a>
+                  <a href="/categories/Diary/UCSD/" itemprop="url" rel="index"><span itemprop="name">UCSD</span></a>
                 </span>
             </span>
 
           
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2020/04/16/2020-04-2020-04-17-weekly-update/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/04/16/2020-04-2020-04-17-weekly-update/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
 
         </div>
       </header>
@@ -270,11 +233,11 @@
 
       
         <p>2020年第十六周</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="dart-flutter-学习">Dart &amp; Flutter 学习</h2>
 <p>最近在疫情期间，闲着无聊想去学一下新东西，刚好在YouTube上就推荐了 Google 的 Flutter 大会视频（应该是之前看 Flutter 介绍视频的联想），简单看了一下视频，觉得还是蛮有意思的。 于是这周周末的时候，就花了一些时间，简单看了一下 Dart 语言和 Flutter 框架， 打算做个 App 试试看。</p>
-<p>Dart 语言应该十分简单，对于有C/C++基础的同学应该都不会陌生，看着 Dart 官方给的一些 <a href="https://dart.dev/samples" target="_blank" rel="noopener">Samples</a>，基本上就能够快速上手。</p>
-<p>而 Flutter 框架显然是一个 Google 想要统一所有平台应用开发的一个更 general 的框架， 正因为如此，它的官方文档除了提供最基础的入门教学，还给出了不同平台有基础的开发者的快速 cookbook ， 我则是直接看的 <a href="https://flutter.dev/docs/get-started/flutter-for/android-devs" target="_blank" rel="noopener">Flutter for Android developers</a>, 所以基本上花了一个多小时，仔细对比了 Android 和 Flutter 的特性， 大概了解到了 Flutter 框架目前的一些现状：</p>
+<p>Dart 语言应该十分简单，对于有C/C++基础的同学应该都不会陌生，看着 Dart 官方给的一些 <a target="_blank" rel="noopener" href="https://dart.dev/samples">Samples</a>，基本上就能够快速上手。</p>
+<p>而 Flutter 框架显然是一个 Google 想要统一所有平台应用开发的一个更 general 的框架， 正因为如此，它的官方文档除了提供最基础的入门教学，还给出了不同平台有基础的开发者的快速 cookbook ， 我则是直接看的 <a target="_blank" rel="noopener" href="https://flutter.dev/docs/get-started/flutter-for/android-devs">Flutter for Android developers</a>, 所以基本上花了一个多小时，仔细对比了 Android 和 Flutter 的特性， 大概了解到了 Flutter 框架目前的一些现状：</p>
 <ol type="1">
 <li><p>框架总体还在完善中， 跨平台支持主流的移动和桌面平台，包括 Android/iOS/Windows/macOS/Linux 等；</p></li>
 <li><p>前端界面支持已经比较完善了，有些是能够支持到对应平台的原生控件样式；</p></li>
@@ -286,10 +249,10 @@
 <p><img src="/img/2020/04/first_ipad_flutter_app.png" alt="first_ipad_flutter_app" title="first_ipad_flutter_app" ></p>
 <h2 id="阅读笔记">阅读笔记</h2>
 <h3 id="可视化git的操作">可视化Git的操作</h3>
-<p>文章链接：<a href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1" target="_blank" rel="noopener">CS Visualized: Useful Git Commands</a></p>
+<p>文章链接：<a target="_blank" rel="noopener" href="https://dev.to/lydiahallie/cs-visualized-useful-git-commands-37p1">CS Visualized: Useful Git Commands</a></p>
 <p>这周刷微博，偶然看到这位程序媛的关于Git文章，被她用于可视化的gif给惊艳到了，这对于普通人理解Git的实际工作原理，有很好的帮助，很值得花时间去回顾一下。而且有一些命令我以前不怎么用过，经过她的介绍，也算是学到了新东西。</p>
 <h3 id="multi-stage-build-for-docker">Multi-stage build for Docker</h3>
-<p>文章链接：<a href="https://blog.bitsrc.io/a-guide-to-docker-multi-stage-builds-206e8f31aeb8" target="_blank" rel="noopener">A Guide to Docker Multi-Stage Builds</a></p>
+<p>文章链接：<a target="_blank" rel="noopener" href="https://blog.bitsrc.io/a-guide-to-docker-multi-stage-builds-206e8f31aeb8">A Guide to Docker Multi-Stage Builds</a></p>
 <p>使用了一段时间Docker用于研究和开发，总有感觉自己在用的 Dockerfile 是那么的臃肿，而最终使得生成的Image是非常大的。</p>
 <p>举个例子，在我之前的一个项目中需要用到OMPL和FCL的库，而在实际的使用上我们只要用到运行库，但我们为了在特定的系统上使用，而不得不重新编译这个库，进而去安装一堆依赖库去编译，从而增加了Image的大小和降低了纯净度。从这个角度出发，我会想只需要把这些库在一个独立环境里先编译好，然后COPY到最终的使用环境，这样就好了。</p>
 <p>毫无疑问，看完这篇文章，我觉得就刚好解决了我这个痛点，它介绍了 Docker 17.05的版本的一个叫multi-stage build的新特性，使得我们可以在一个 Dockerfile 里去定义不同 stages，然后不同的 stages 能够互相访问，且各自独立，所以使得最终我们运行环境下的Image尽可能compact，达到我们对可维护和可控制的需求。</p>
@@ -327,22 +290,14 @@
   
   
 
-  </div>
 
 
           </div>
           
-    
-  <div class="comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
-    </div>
-  </div>
-  
 
 <script>
   window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
+    let { activeClass } = CONFIG.comments;
     if (CONFIG.comments.storage) {
       activeClass = localStorage.getItem('comments_active') || activeClass;
     }
@@ -385,7 +340,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dart-flutter-学习"><span class="nav-number">1.</span> <span class="nav-text">Dart &amp; Flutter 学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读笔记"><span class="nav-number">2.</span> <span class="nav-text">阅读笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可视化git的操作"><span class="nav-number">2.1.</span> <span class="nav-text">可视化Git的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi-stage-build-for-docker"><span class="nav-number">2.2.</span> <span class="nav-text">Multi-stage build for Docker</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#dart-flutter-%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">Dart &amp; Flutter 学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0"><span class="nav-number">2.</span> <span class="nav-text">阅读笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96git%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">可视化Git的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi-stage-build-for-docker"><span class="nav-number">2.2.</span> <span class="nav-text">Multi-stage build for Docker</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -420,13 +375,10 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+        <a href="https://weibo.com/jasonradcliffe/" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;jasonradcliffe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://twitter.com/__JasonYe__" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;__JasonYe__" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+        <a href="https://github.com/IamJasonYe/" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;IamJasonYe&#x2F;" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
   </div>
 
@@ -446,19 +398,18 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jason Ye</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.0
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
@@ -511,39 +462,6 @@
   
 
   
-
-  
-
-<script>
-  function loadCount() {
-    var d = document, s = d.createElement('script');
-    s.src = 'https://jasonye.disqus.com/count.js';
-    s.id = 'dsq-count-scr';
-    (d.head || d.body).appendChild(s);
-  }
-  // defer loading until the whole page loading is completed
-  window.addEventListener('load', loadCount, false);
-</script>
-<script>
-  var disqus_config = function() {
-    this.page.url = "http://jasonye.xyz/2020/04/16/2020-04-2020-04-17-weekly-update/";
-    this.page.identifier = "2020/04/16/2020-04-2020-04-17-weekly-update/";
-    this.page.title = "每周更新 weekly update (16/52)";
-    };
-  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
-    if (window.DISQUS) {
-      DISQUS.reset({
-        reload: true,
-        config: disqus_config
-      });
-    } else {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://jasonye.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', '' + +new Date());
-      (d.head || d.body).appendChild(s);
-    }
-  });
-</script>
 
 </body>
 </html>
